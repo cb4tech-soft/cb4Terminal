@@ -4,9 +4,9 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QDebug>
-#include <QFileDialog>
+//#include <QFileDialog>
 #include <QStandardPaths>
-
+#include <QFile>
 SerialInfo serialInfo;
 
 

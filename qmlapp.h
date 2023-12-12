@@ -4,9 +4,8 @@
 
 #include <QObject>
 #include <QtQuick/QQuickView>
-  #include <QQmlApplicationEngine>
+#include <QQmlApplicationEngine>
 #include "viewpage/viewpage.h"
-#include <QSystemTrayIcon>
 
 class QmlApp : public QQmlApplicationEngine
 {
@@ -31,10 +30,10 @@ private:
     QAction *maximizeAction;
     QAction *restoreAction;
     QAction *quitAction;
-
+/*
     QSystemTrayIcon * sysTrayIcon;
     QMenu *trayIconMenu;
-
+*/
     QTimer *timer;
 
 };
