@@ -107,7 +107,7 @@ AppRectangle {
         anchors.rightMargin: 10
         anchors.leftMargin: 10
         currentIndex: 1
-        model: [9600, 19200, 38400, 57600, 76800, 115200]
+        model: [9600, 19200, 38400, 57600, 76800, 115200, 230400, 460800, 576000, 921600]
         height: 40
     }
 
