@@ -4,8 +4,10 @@ import  "../Style"
 import SerialManager
 import QtQuick.Layouts
 
+import Qt.labs.settings
 
-AppRectangle {
+
+Item {
     id:root
     property SerialManager manager
     width: 600
@@ -122,7 +124,7 @@ AppRectangle {
 
         }
 
-        AppButton{
+        Button{
             id: sendButton
             Timer{
                 id:timerRepeat
@@ -172,7 +174,7 @@ AppRectangle {
             id: textLine
             horizontalAlignment: Text.AlignLeft
             enabled: serialConfig.manager.isConnected
-            placeholderText: "Hello World!"
+            placeholderText: (switchHex.checked) ? "4A,01,CB,47" : "Hello World!"
             anchors.top: parent.top
             anchors.topMargin: 4
 
@@ -188,26 +190,25 @@ AppRectangle {
         }
     }
 
+    Settings {
+        property alias comboCRLF_index: comboCRLF.currentIndex
+        property alias switchHex_state: switchHex.checked
+    }
     ColumnLayout{
         id: columnOption
         anchors.right: sendLayout.left
         anchors.top: parent.top
+        anchors.topMargin: 2
         anchors.bottom: parent.bottom
         anchors.rightMargin: 5
         spacing: 1
-        AppSwitch {
+        Switch {
             id: switchHex
             text: "Hex  "
             Layout.fillHeight: true
-            onClicked: {
-                if(this.checked)
-                    textLine.placeholderText = "4A,01,CB,47"
-                else
-                    textLine.placeholderText = "Hello World!"
-            }
         }
 
-        AppComboBox {
+        ComboBox {
             id: comboCRLF
             model: ["No CRLF", "\\n", "\\r", "\\r\\n", "\\0"]
             height: 37

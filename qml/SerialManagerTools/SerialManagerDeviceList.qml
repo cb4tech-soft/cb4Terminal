@@ -2,11 +2,10 @@ import QtQuick 2.0
 import SerialManager 1.0
 import QtQuick.Controls 2.12
 import SerialInfo 1.0
-import "../Style"
-Item {
-//    property SerialManager serialManager: undefined
 
-
+ComboBox{
+    id: port
+    model: internal.portList
     QtObject{
         id:internal
         property var portList: []
@@ -39,9 +38,7 @@ Item {
                 console.log(newList)
                 newComPort(newList)
             }
-
         }
-
     }
 
     Component.onCompleted: {
@@ -49,15 +46,12 @@ Item {
         console.log(internal.portList)
         port.currentIndex = port.count-1
     }
-    AppComboBox{
-        id: port
-        model: internal.portList
-        width: parent.width
+
         onDownChanged: {
             if (down)
                 updateList()
         }
-    }
+
 
 }
 

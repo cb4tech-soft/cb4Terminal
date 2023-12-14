@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import "./Style/"
 
 
 import QtQuick.Layouts
@@ -14,16 +13,24 @@ import MyScreenInfo
 
 import PluginInfo
 
+import Qt.labs.settings
 import 'qrc:/js/fileStringTools.js' as FileStringTools
 
 // @disable-check M208
 ApplicationWindow {
     id:root
-    property bool themeDark: true
     property bool scanPortEnable : true
     property bool clearOnSend : false
+    property bool sysTrayPopupEnable: true
+    property bool comPopupEnable : true
     property alias serManager: serManager
 
+    Settings {
+        property alias scanPortEnable: root.scanPortEnable
+        property alias clearOnSend: root.clearOnSend
+        property alias sysTrayPopupEnable: root.sysTrayPopupEnable
+        property alias comPopupEnable: root.comPopupEnable
+    }
     Connections {
         target: PluginInfo
         function onPluginFilesChanged() {
@@ -105,7 +112,12 @@ ApplicationWindow {
     }
     visible: true
     width:850
-    height:Math.min(MyScreenInfo.getScreenInfo(x,  y).height - 100, 850);
+
+    Component.onCompleted: {
+        root.height = Math.min(MyScreenInfo.getScreenInfo(x,  y).height - 100, 850)
+        root.y = MyScreenInfo.getScreenInfo(x,  y).height - root.height - 100
+        if (root.y < 0) root.y = 0
+    }
     Donate{
         id:donation
         anchors.fill:parent
@@ -120,9 +132,6 @@ ApplicationWindow {
         width: 200
     }
 
-    onThemeDarkChanged: {
-        AppStyle.darkEnable = themeDark
-    }
     SerialManager{
         id: serManager
         baudrate: SerialManager.Baud19200
@@ -132,7 +141,6 @@ ApplicationWindow {
         anchors.fill: parent
         SerialTool.SerialManagerConfig{
             id:serialConfig
-            width:200
             SplitView.preferredWidth: 140
             manager: serManager
             comList.onNewComPort: function (portname){
@@ -143,51 +151,45 @@ ApplicationWindow {
                     i++;
                 }
                 popup.update_text()
-                popup.open()
+                if (sysTrayPopupEnable)
+                    sysTray.showMessage("New device found",  popup.comList.join(', '))
+                if (comPopupEnable)
+                    popup.open()
                 popup.timer.interval = 4000;
+                popup.timer.running = true;
 
-                sysTray.showMessage("New device found",  popup.comList.join(', '))
             }
             comList.scanPort: (root.scanPortEnable)? !serManager.isConnected : false
         }
-
-        AppRectangle {
-            id: mainSplit
-            height: parent.height
-            SplitView.preferredWidth: 550
-
-            SplitView{
-                id:splitViewSerial
-                anchors.fill: parent
-                orientation: Qt.Vertical
-
-                    SerialTool.SerialManagerDataViewer{
-                        id:dataViewer
-                        SplitView.preferredHeight: parent.height - 80
-                        manager : serManager
-                        onLineDataAppend: function(lineData) {
-                            if (heatmapLoader.active && heatmapLoader.item)
-                            {
-                                heatmapLoader.item.datalineAppend(lineData);
-                            }
-                        }
+        SplitView{
+            id:splitViewSerial
+            orientation: Qt.Vertical
+            SerialTool.SerialManagerDataViewer{
+                id:dataViewer
+                SplitView.fillHeight: true
+                manager : serManager
+                onLineDataAppend: function(lineData) {
+                    if (heatmapLoader.active && heatmapLoader.item)
+                    {
+                        heatmapLoader.item.datalineAppend(lineData);
                     }
+                }
+            }
 
-                    SerialTool.SerialManagerLineSender {
-                        id: serialManagerLineSender
-                        y: 0
+            SerialTool.SerialManagerLineSender {
+                id: serialManagerLineSender
+                y: 0
 
-                        SplitView.preferredHeight: 80
-                        manager : serManager
-                        onSendStringData: function(stringData){
-                            dataViewer.sendString(stringData);
-                            if (root.clearOnSend)
-                                serialManagerLineSender.textInput = ""
-                        }
-                        onSendHexaData: function(hexaData){ dataViewer.send(hexaData)
-                            if (root.clearOnSend)
-                                serialManagerLineSender.textInput = "" }
-                    }
+                SplitView.preferredHeight: 80
+                manager : serManager
+                onSendStringData: function(stringData){
+                    dataViewer.sendString(stringData);
+                    if (root.clearOnSend)
+                        serialManagerLineSender.textInput = ""
+                }
+                onSendHexaData: function(hexaData){ dataViewer.send(hexaData)
+                    if (root.clearOnSend)
+                        serialManagerLineSender.textInput = "" }
             }
         }
     }
@@ -195,9 +197,8 @@ ApplicationWindow {
 
     Platform.SystemTrayIcon {
         id:sysTray
-        visible: true
+        visible: root.sysTrayPopupEnable
         icon.source: "qrc:/qml/icon/logo1.ico"
-
         menu: Platform.Menu {
             Platform.MenuItem {
                 text: qsTr("Quit")

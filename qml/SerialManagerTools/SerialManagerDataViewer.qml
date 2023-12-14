@@ -4,7 +4,8 @@ import Qt.labs.platform
 import  "../Style"
 import SerialManager
 
-AppRectangle {
+import Qt.labs.settings
+Item {
     id: appRectangle
     width: 400
     height: 300
@@ -145,6 +146,13 @@ AppRectangle {
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
         anchors.rightMargin: 0
+
+        Settings {
+            property alias ctrlTime_state: ctrlTime.checked
+            property alias ctrlScroll_state: ctrlScroll.checked
+            property alias ctrlEcho_state: ctrlEcho.checked
+            property alias ctrlHex_state: ctrlHex.checked
+        }
         Row{
             anchors.fill: parent
             z: 1
@@ -152,40 +160,40 @@ AppRectangle {
             anchors.bottomMargin: 1
             layoutDirection: Qt.RightToLeft
 
-            AppButton{
+            Button{
                 id:ctrlClear
                 text: "clear"
                 onClicked: serialData.clear()
                 height: parent.height
             }
-            AppButton{
+            Button{
                 id:ctrlSave
                 text: "Save Log"
                 onClicked: saveDialog.open()
                 height: parent.height
             }
-            AppCheckBox{
+            CheckBox{
                 id: ctrlTime
                 text: "Show Time"
                 checkable: true
                 checked: true
                 height: parent.height
             }
-            AppCheckBox{
+            CheckBox{
                 id: ctrlScroll
                 text: "Auto Scroll"
                 checkable: true
                 checked: true
                 height: parent.height
             }
-            AppCheckBox{
+            CheckBox{
                 id: ctrlEcho
                 text: "Echo Mode"
                 checkable: true
                 checked: true
                 height: parent.height
             }
-            AppCheckBox{
+            CheckBox{
                 id: ctrlHex
                 text: "Hex Mode"
                 checkable: true

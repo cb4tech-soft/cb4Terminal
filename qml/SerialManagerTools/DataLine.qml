@@ -30,7 +30,7 @@ Row {
         anchors.top: parent.top
         height: textArea.contentHeight +2
         width: parent.width
-        text: (isSendedData)?"<font color=\"blue\">" + (((showTime == true)? dateString + " : " : "") + ((hexEnable)?toHex(strData) : strRichData)) + "</font>"
+        text: (isSendedData)?"<font color=\"" + ((Material.theme == Material.Dark) ? "lightblue" : "blue" )+ "\">" + (((showTime == true)? dateString + " : " : "") + ((hexEnable)?toHex(strData) : strRichData)) + "</font>"
                            :  (((showTime == true)? dateString + " : " : "") + ((hexEnable) ? toHex(strData) : strRichData))
 
         horizontalAlignment: Text.AlignLeft
@@ -44,21 +44,7 @@ Row {
         readOnly: true
 
         Component.onCompleted: {
-//            console.log(strData)
-            //strRichData = strData.join('')
             strRichData = strData.replace(/\n/g, "<br />")
-//            row.height = textArea.contentHeight +2
-//            textArea.height = textArea.contentHeight +2
-            /*
-            let lines = strData.split(/\r|\r\n|\n/);
-            let count = lines.length;
-            if (count == 1)
-            {
-                row.height = textArea.implicitHeight/2
-                textArea.height = textArea.implicitHeight/2
-            }
-            */
-//            console.log("text area dataline complete " + textArea.contentHeight);
         }
     }
 

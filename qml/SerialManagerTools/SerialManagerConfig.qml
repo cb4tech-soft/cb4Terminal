@@ -8,12 +8,10 @@ import SerialManager 1.0
 import Qt.labs.settings
 
 
-AppRectangle {
+Item {
     id: serialConfig
     width: 200
     height: 400
-    color: "#ffffff"
-    border.color: "#ffffff"
     clip: true
     signal connectClicked;
     property int baudrate: baudRateList.currentValue
@@ -59,7 +57,7 @@ AppRectangle {
     property SerialManager manager
     property alias comList : comList
 
-    AppLabel {
+    Label {
         id: label
         text: "Serial port Settings"
         anchors.left: parent.left
@@ -85,7 +83,7 @@ AppRectangle {
 
 
     }
-    AppLabel {
+    Label {
         id: label2
         text: "Baudrate"
         anchors.left: parent.left
@@ -98,7 +96,7 @@ AppRectangle {
         anchors.leftMargin: 0
         height:40
     }
-    AppComboBox{
+    ComboBox{
         id:baudRateList
         anchors.left: parent.left
         anchors.right: parent.right
@@ -111,7 +109,7 @@ AppRectangle {
         height: 40
     }
 
-    AppLabel {
+    Label {
         id: label3
         height: 40
         text: "Number of data bits"
@@ -125,7 +123,7 @@ AppRectangle {
         anchors.leftMargin: 0
     }
 
-    AppComboBox {
+    ComboBox {
         id: dataBitsList
         height: 40
         anchors.left: parent.left
@@ -138,7 +136,7 @@ AppRectangle {
         model: [5, 6, 7, 8]
     }
 
-    AppLabel {
+    Label {
         id: label4
         height: 40
         text: "Flow control"
@@ -152,7 +150,7 @@ AppRectangle {
         anchors.leftMargin: 0
     }
 
-    AppComboBox {
+    ComboBox {
         id: flowControlList
         height: 40
         anchors.left: parent.left
@@ -165,7 +163,7 @@ AppRectangle {
         model: ["None", "RTS/CTS", "XON/XOFF"]
     }
 
-    AppLabel {
+    Label {
         id: label5
         height: 40
         text: "Parity"
@@ -179,7 +177,7 @@ AppRectangle {
         anchors.leftMargin: 0
     }
 
-    AppComboBox {
+    ComboBox {
         id: parityList
         height: 40
         anchors.left: parent.left
@@ -192,7 +190,7 @@ AppRectangle {
         model: ["None", "Even Partiy", "Odd Parity", "Space Parity", "Mark Parity"]
     }
 
-    AppLabel {
+    Label {
         id: label6
         height: 40
         text: "Stop bits"
@@ -206,7 +204,7 @@ AppRectangle {
         anchors.leftMargin: 0
     }
 
-    AppComboBox {
+    ComboBox {
         id: stopBitsList
         height: 40
         anchors.left: parent.left
@@ -219,7 +217,7 @@ AppRectangle {
         model: ["1", "1,5", "2"]
     }
 
-    AppButton{
+    Button{
         id:connectButton
         text:(!serialConfig.manager.isConnected) ? "Open" : "Close"
         anchors.top: stopBitsList.bottom

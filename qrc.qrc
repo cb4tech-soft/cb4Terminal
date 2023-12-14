@@ -38,5 +38,6 @@
         <file>qml/CustomButtonWindow.qml</file>
         <file>js/fileStringTools.js</file>
         <file>qml/AppSerialMenu.qml</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

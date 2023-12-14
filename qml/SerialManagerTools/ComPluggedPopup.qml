@@ -26,8 +26,6 @@ Popup {
 
     closePolicy: Popup.CloseOnPressOutsideParent | Popup.CloseOnPressOutside
     onOpened: {
-        //var str
-
         timer.running = true
     }
     onComListChanged: {
@@ -42,13 +40,12 @@ Popup {
             popup.close()
         }
     }
-    AppLabel{
+    Label{
         id: label
         anchors.fill: parent
         text: "New device found:\n" + popup.comList.join(', ')
         horizontalAlignment: Text.AlignHCenter
         wrapMode: Text.WordWrap
-
     }
 
     Timer{
