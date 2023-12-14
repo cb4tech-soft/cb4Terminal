@@ -10,8 +10,6 @@
 #include "viewpage/viewpage.h"
 #include "serialmanager.h"
 #include "pluginInfo.h"
-#include <QSystemTrayIcon>
-#include <QMenu>
 #include "qml/myscreeninfo.h"
 #include "qml/heatmapdata.h"
 #include "cb4tools/build_info.h"
