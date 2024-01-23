@@ -54,7 +54,7 @@ Item {
         if(switchHex.checked) {
             var error = false
             var bytes = hexToBytes(stringToSend)
-            console.log(bytes)
+            //console.log(bytes)
             if(!error) {
                 //textLine.backgroundColor = AppStyle.backgroundLight
                 stringToSend = bytes
@@ -116,8 +116,8 @@ Item {
             Layout.preferredHeight: root.height - sendButton.height - 4
             visible: sendLayout.advancedMode
             stepSize: 100
-            to: 5000
-            from: 10
+            to: 10000
+            from: 1
             value: 500
             editable: true
             Layout.topMargin: 1

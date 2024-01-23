@@ -4,5 +4,6 @@
         <file>plugin/CharGenerator/CharGenerator.qml</file>
         <file>plugin/BitRegister/BitRegister.qml</file>
         <file>plugin/AnimationTester/AnimationTester.qml</file>
+        <file>plugin/Burst/Burst.qml</file>
     </qresource>
 </RCC>

@@ -58,7 +58,7 @@ ApplicationWindow {
                     pluginLoaderItem.source = ""
                 }
                 function onSendString(serialString) {
-                    console.log(serialString)
+                   // console.log(serialString)
                     serialManagerLineSender.sendStringData(serialString)
                 }
             }

@@ -87,7 +87,7 @@ Item {
         var dateString = "<font color=\"grey\">" + currentDate.toLocaleTimeString(Qt.locale("fr_FR"),"h:mm:ss") + "</font>";
 
         serialData.append({"timestamp": dateString ,"serData": r, "isSend": true})
-        console.log(r)
+        //console.log(r)
     }
 
     function send(outData)
