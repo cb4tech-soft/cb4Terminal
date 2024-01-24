@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("cb4tech.com");
     app.setApplicationName("CB4Terminal");
 
+    qputenv("QML_DISABLE_DISK_CACHE", "true");
+
     QmlApp a;
 #ifdef TESTING
 #endif

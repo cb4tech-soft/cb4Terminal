@@ -14,7 +14,7 @@
 #include "qml/heatmapdata.h"
 #include "cb4tools/build_info.h"
 #include "cb4tools/debug_info.h"
-
+#include "componentcachemanager.h"
 #ifdef Q_OS_WIN
 
 
@@ -34,6 +34,7 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     MyScreenInfo::registerQml();
     HeatMapData::registerQml();
     PluginInfo::registerQml();
+    ComponentCacheManager::registerQml();
 
     load(QUrl("qrc:/qml/main.qml"));
     QDBG_YELLOW() << compilationDateTime << DBG_CLR_RESET;

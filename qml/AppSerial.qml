@@ -16,6 +16,8 @@ import PluginInfo
 import Qt.labs.settings
 import 'qrc:/js/fileStringTools.js' as FileStringTools
 
+import ComponentCacheManager
+
 // @disable-check M208
 ApplicationWindow {
     id:root
@@ -49,6 +51,8 @@ ApplicationWindow {
             function deactivate(){
                 pluginLoaderItem.active = false
                 console.log("deactivate")
+
+                ComponentCacheManager.trim()
                 pluginLoaderItem.source = ""
             }
             Connections {
