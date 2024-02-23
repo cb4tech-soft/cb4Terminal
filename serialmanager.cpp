@@ -50,6 +50,7 @@ void SerialManager::connectToPort(QString portName)
         port = nullptr;
         setIsConnected(0);
     }
+//    portName = "ttysWK2"; // ruggedTablet bruno (not detected)
 
     port = new QSerialPort(portName);
     m_portName = portName;
@@ -59,6 +60,7 @@ void SerialManager::connectToPort(QString portName)
     port->open(QIODevice::ReadWrite);
     if (port->isOpen())
     {
+        qDebug()<< "port open " << portName;
         setIsConnected(1);
     }
     connect(port,SIGNAL(readyRead()), this, SLOT(checkData()));

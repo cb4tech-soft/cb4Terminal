@@ -10,14 +10,16 @@
 #include <QFile>
 #include <QTimer>
 #include <QDirIterator>
-
+#ifdef Q_OS_WINDOWS
 extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-
+#endif
 PluginInfo* PluginInfo::m_pThis = nullptr;
 
 PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
 {
+#ifdef Q_OS_WINDOWS
     qt_ntfs_permission_lookup++;
+#endif
     qDebug()<<"PluginInfo constructor";
     QDir d(pluginFolder);
     if (!d.exists())
