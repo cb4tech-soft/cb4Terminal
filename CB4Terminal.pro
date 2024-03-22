@@ -2,6 +2,11 @@ QT += quick serialport qml core
 QT += quickcontrols2
 
 windows: {
+#    build_nr.commands =
+#    build_nr.depends = FORCE
+#    QMAKE_EXTRA_TARGETS += build_nr
+#    PRE_TARGETDEPS += build_nr
+#    HEADERS  += $$PWD/cb4tools/build_info.h
 }
 
 android: {

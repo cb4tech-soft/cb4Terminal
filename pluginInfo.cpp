@@ -2,6 +2,7 @@
 
 #include "pluginInfo.h"
 #include "cb4tools/debug_info.h"
+#include "cb4tools/build_info.h"
 
 #include <QQmlApplicationEngine>
 #include <QQmlEngine>
