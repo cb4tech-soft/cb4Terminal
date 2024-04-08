@@ -18,7 +18,6 @@ import 'qrc:/js/fileStringTools.js' as FileStringTools
 
 import ComponentCacheManager
 
-// @disable-check M208
 ApplicationWindow {
     id:root
     property bool scanPortEnable : true
@@ -26,6 +25,17 @@ ApplicationWindow {
     property bool sysTrayPopupEnable: true
     property bool comPopupEnable : true
     property alias serManager: serManager
+
+    visible: true
+    width:850
+
+    Component.onCompleted: {
+        root.height = Math.min(MyScreenInfo.getScreenInfo(x,  y).height - 100, 850)
+        root.y = MyScreenInfo.getScreenInfo(x,  y).height - root.height - 100
+        if (root.y < 25) root.y = 25
+
+        console.log("windows position : ", root.y)
+    }
 
     Settings {
         property alias scanPortEnable: root.scanPortEnable
@@ -114,14 +124,7 @@ ApplicationWindow {
 
         }
     }
-    visible: true
-    width:850
 
-    Component.onCompleted: {
-        root.height = Math.min(MyScreenInfo.getScreenInfo(x,  y).height - 100, 850)
-        root.y = MyScreenInfo.getScreenInfo(x,  y).height - root.height - 100
-        if (root.y < 0) root.y = 0
-    }
     Donate{
         id:donation
         anchors.fill:parent
