@@ -12,8 +12,8 @@
 #include "pluginInfo.h"
 #include "qml/myscreeninfo.h"
 #include "qml/heatmapdata.h"
-#include "cb4tools/build_info.h"
-#include "cb4tools/debug_info.h"
+#include "tools/debug_info.h"
+#include "tools/appinfo.h"
 #include "componentcachemanager.h"
 #ifdef Q_OS_WIN
 
@@ -35,9 +35,11 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     HeatMapData::registerQml();
     PluginInfo::registerQml();
     ComponentCacheManager::registerQml();
+    AppInfo::registerQml();
+//    parent->setTitle(AppInfo::instance()->getVersionName());
 
     load(QUrl("qrc:/qml/main.qml"));
-    QDBG_YELLOW() << compilationDateTime << DBG_CLR_RESET;
+    QDBG_YELLOW() << COMPILATION_DATE_TIME << DBG_CLR_RESET;
 }
 
 

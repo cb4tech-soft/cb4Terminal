@@ -17,6 +17,7 @@ import Qt.labs.settings
 import 'qrc:/js/fileStringTools.js' as FileStringTools
 
 import ComponentCacheManager
+import AppInfo
 
 ApplicationWindow {
     id:root
@@ -28,6 +29,7 @@ ApplicationWindow {
 
     visible: true
     width:850
+    title: "CB4Terminal :" + AppInfo.getVersionName()
 
     Component.onCompleted: {
         root.height = Math.min(MyScreenInfo.getScreenInfo(x,  y).height - 100, 850)

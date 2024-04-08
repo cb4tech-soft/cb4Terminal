@@ -1,8 +1,7 @@
 
 
 #include "pluginInfo.h"
-#include "cb4tools/debug_info.h"
-#include "cb4tools/build_info.h"
+#include "tools/debug_info.h"
 
 #include <QQmlApplicationEngine>
 #include <QQmlEngine>
@@ -35,7 +34,7 @@ PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
     updatePluginList();
     watcher.addPath(pluginFolder);
     connect(&watcher, &QFileSystemWatcher::directoryChanged, this, &PluginInfo::updatePluginList);
-
+    compilationDateTime = COMPILATION_DATE_TIME;
 }
 
 // extract qml plugins from plugins.qrc to plugin folder
@@ -55,10 +54,17 @@ void PluginInfo::extractQrcPlugin()
     }
     else
     {
-        versionFile.open(QIODevice::ReadOnly);
+        if (!versionFile.open(QIODevice::ReadOnly))
+        {
+            qDebug()<< "create file version.txt" << QStringLiteral(__DATE__);
+            versionFile.open(QIODevice::ReadWrite);
+            versionFile.write(compilationDateTime.toLatin1());
+            versionFile.close();
+        }
+
         QByteArray version = versionFile.readAll();
         versionFile.close();
-        if (version != compilationDateTime)
+        if (version != compilationDateTime.toLatin1())
         {
             qDebug()<<"new version of plugin";
             newVersion = true;

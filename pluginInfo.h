@@ -5,7 +5,6 @@
 #include <QQmlEngine>
 #include <QFileSystemWatcher>
 
-#include "cb4tools/build_info.h"
 
 #define BUILD_PLUGIN_TESTUNIT 0
 #define BUILD_VERSION_FILE "version.txt"
@@ -44,6 +43,7 @@ private:
     const QString compdt = QDateTime::fromString(QStringLiteral(__DATE__) + QStringLiteral(" ") + QStringLiteral(__TIME__), "MMM  d yyyy hh:mm:ss").toString("MMddyy_hhmmss");//.arg().arg(__TIME__);
 
     QString pluginFolder = "./plugin/";
+    QString compilationDateTime;
     QStringList m_pluginFiles;
 };
 

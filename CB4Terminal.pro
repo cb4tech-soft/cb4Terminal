@@ -1,12 +1,23 @@
 QT += quick serialport qml core
 QT += quickcontrols2
 
+VERSION = 2.0.0.1 #major.minor.patch.build
+DEFINES += APP_VERSION_NAME=\\\"$$VERSION\\\"
+DEFINES += APP_VERSION_CODE=\\\"$$VERSION\\\"
+
 windows: {
-#    build_nr.commands =
-#    build_nr.depends = FORCE
-#    QMAKE_EXTRA_TARGETS += build_nr
-#    PRE_TARGETDEPS += build_nr
-#    HEADERS  += $$PWD/cb4tools/build_info.h
+    #check if release or debug
+    CONFIG(release, debug|release) {
+        DESTDIR = $$PWD/bin/windows/release
+    } else {
+        DESTDIR = $$PWD/bin/windows/debug
+    }
+
+    appinfo.obj.depends = FORCE
+    QMAKE_EXTRA_TARGETS += appinfo.obj
+    PRE_TARGETDEPS += appinfo.obj
+
+    QMAKE_POST_LINK =  windeployqt $$shell_path($$DESTDIR/$${TARGET}.exe) --qmldir $$PWD/qml --no-translations
 }
 
 android: {
@@ -29,6 +40,8 @@ SOURCES += \
         qml/myscreeninfo.cpp \
         qmlapp.cpp \
         serialmanager.cpp \
+        tools/appinfo.cpp \
+        tools/crashReportTool.cpp \
         viewpage/viewpage.cpp
 
 HEADERS += \
@@ -38,8 +51,10 @@ HEADERS += \
         qml/heatmapdata.h \
         qml/myscreeninfo.h \
         qmlapp.h \
-        script/build_inc.bat \
         serialmanager.h \
+        tools/appinfo.h \
+        tools/crashReportTool.h \
+        tools/debug_info.h \
         viewpage/viewpage.h
 
 DEPENDPATH *= $${INCLUDEPATH}
