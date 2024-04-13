@@ -11,6 +11,7 @@ Item {
     height: 300
     property alias dataView: dataView
     property alias serialData: serialData
+    property alias switchRow: switchRow
 
     property SerialManager manager
     signal lineDataAppend(string lineData);
@@ -154,6 +155,13 @@ Item {
             property alias ctrlHex_state: ctrlHex.checked
         }
         Row{
+            id: switchRow
+            property alias ctrlClear: ctrlClear
+            property alias ctrlSave: ctrlSave
+            property alias ctrlTime: ctrlTime
+            property alias ctrlScroll: ctrlScroll
+            property alias ctrlEcho: ctrlEcho
+            property alias ctrlHex: ctrlHex
             anchors.fill: parent
             z: 1
             anchors.topMargin: 1

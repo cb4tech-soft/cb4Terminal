@@ -39,5 +39,7 @@
         <file>js/fileStringTools.js</file>
         <file>qml/AppSerialMenu.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>qml/ShortcutMenuItem.qml</file>
+        <file>qml/ShortcutHelp.qml</file>
     </qresource>
 </RCC>

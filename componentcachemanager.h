@@ -14,6 +14,7 @@ public:
     static QObject *qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine);
 
     Q_INVOKABLE void trim() { instance_engine->clearComponentCache(); }
+    Q_INVOKABLE void createNewInstance();
 
     QQmlEngine *instance_engine = nullptr;
 

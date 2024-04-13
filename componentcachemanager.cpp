@@ -4,6 +4,8 @@
 
 #include <QQmlApplicationEngine>
 #include <QQmlEngine>
+#include <QProcess>
+#include <QGuiApplication>
 
 ComponentCacheManager *ComponentCacheManager::m_pThis = nullptr;
 
@@ -37,5 +39,12 @@ QObject *ComponentCacheManager::qmlInstance(QQmlEngine *engine, QJSEngine *scrip
     ComponentCacheManager *inst = ComponentCacheManager::instance();
     inst->instance_engine = engine;
     return inst;
+}
+
+void ComponentCacheManager::createNewInstance()
+{
+    QString programPath = QGuiApplication::applicationFilePath();
+    qDebug() << "Starting new instance: " << programPath;
+    QProcess::startDetached(programPath);
 }
 

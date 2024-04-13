@@ -17,6 +17,12 @@ ApplicationWindow {
         color: "red"
         width: 100
         height: 100
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                sendString("Hello RED")
+            }
+        }
     }
 
     Label {

@@ -15,18 +15,23 @@ import PluginInfo
 
 import 'qrc:/js/fileStringTools.js' as FileStringTools
 
+import ComponentCacheManager
 
 MenuBar {
    Menu {
        title: "Advanced"
+       ShortcutMenuItem { id: menuItem; text: "New window"; width:implicitBackgroundWidth
+            sequence: "Ctrl+Shift+N";
+           onTriggered: ComponentCacheManager.createNewInstance()
+
+       }
        Action { text: "Scan port"; checkable: true; checked:root.scanPortEnable
            onCheckedChanged: function (checked) {
                root.scanPortEnable = checked
                checked = Qt.binding(function() { return root.scanPortEnable })
            }
-
        }
-       Menu{
+       Menu {
            title: "Notification"
            Action { text: "Desktop"; checkable: true; checked:root.sysTrayPopupEnable
                enabled: root.scanPortEnable
@@ -44,15 +49,17 @@ MenuBar {
            }
        }
 
-
        MenuSeparator{}
+
        Action { text: "ClearOnSend"; checkable: true; checked:root.clearOnSend
            onCheckedChanged: function (checked) {
                root.clearOnSend = checked
                checked = Qt.binding(function() { return root.clearOnSend })
            }
        }
+
        MenuSeparator { }
+
        Action { text: qsTr("&Quit")
                 onTriggered: Qt.quit()
        }
@@ -147,6 +154,9 @@ MenuBar {
        title: "Help"
        Action { text: "Donation"
            onTriggered: {donation.visible = true; donation.catIndex = Math.ceil(Math.random() * 19)}
+       }
+       Action { text: "Shortcut"
+           onTriggered: {shortcutHelp.visible = true}
        }
    }
 }

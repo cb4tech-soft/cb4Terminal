@@ -6,13 +6,13 @@ DEFINES += APP_VERSION_NAME=\\\"$$VERSION\\\"
 DEFINES += APP_VERSION_CODE=\\\"$$VERSION\\\"
 
 windows: {
+
     #check if release or debug
     CONFIG(release, debug|release) {
         DESTDIR = $$PWD/bin/windows/release
     } else {
         DESTDIR = $$PWD/bin/windows/debug
     }
-
     appinfo.obj.depends = FORCE
     QMAKE_EXTRA_TARGETS += appinfo.obj
     PRE_TARGETDEPS += appinfo.obj

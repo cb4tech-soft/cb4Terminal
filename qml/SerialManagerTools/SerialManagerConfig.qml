@@ -14,6 +14,10 @@ Item {
     height: 400
     clip: true
     signal connectClicked;
+
+    property alias connectButton: connectButton
+    property alias baudrateCB: baudRateList
+
     property int baudrate: baudRateList.currentValue
     property int dataBits: dataBitsList.currentValue
     property int flowControl: flowControlList.currentIndex

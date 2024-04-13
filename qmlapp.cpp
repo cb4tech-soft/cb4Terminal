@@ -15,6 +15,7 @@
 #include "tools/debug_info.h"
 #include "tools/appinfo.h"
 #include "componentcachemanager.h"
+#include <QGuiApplication>
 #ifdef Q_OS_WIN
 
 
@@ -28,6 +29,7 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     timer->setInterval(5000);
     timer->start();
 
+
     QQuickStyle::setStyle("Material");
 
     SerialManager::registerQml();
@@ -37,7 +39,7 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     ComponentCacheManager::registerQml();
     AppInfo::registerQml();
 //    parent->setTitle(AppInfo::instance()->getVersionName());
-
+    QDBG_YELLOW() << QGuiApplication::arguments();
     load(QUrl("qrc:/qml/main.qml"));
     QDBG_YELLOW() << COMPILATION_DATE_TIME << DBG_CLR_RESET;
 }
