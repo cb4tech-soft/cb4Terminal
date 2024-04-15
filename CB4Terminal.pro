@@ -1,7 +1,7 @@
 QT += quick serialport qml core
 QT += quickcontrols2
 
-VERSION = 2.1.0.1 #major.minor.patch.build
+VERSION = 2.1.1.0 #major.minor.patch.build
 DEFINES += APP_VERSION_NAME=\\\"$$VERSION\\\"
 DEFINES += APP_VERSION_CODE=\\\"$$VERSION\\\"
 
@@ -36,7 +36,6 @@ SOURCES += \
         componentcachemanager.cpp \
         main.cpp \
         pluginInfo.cpp \
-        qml/heatmapdata.cpp \
         qml/myscreeninfo.cpp \
         qmlapp.cpp \
         serialmanager.cpp \
@@ -48,7 +47,6 @@ HEADERS += \
         cb4tools/debug_info.h \
         componentcachemanager.h \
         pluginInfo.h \
-        qml/heatmapdata.h \
         qml/myscreeninfo.h \
         qmlapp.h \
         serialmanager.h \

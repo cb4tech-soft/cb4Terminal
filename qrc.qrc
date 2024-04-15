@@ -31,11 +31,8 @@
         <file>qml/Donate.qml</file>
         <file>qml/icon/ico0.ico</file>
         <file>qml/icon/logo1.ico</file>
-        <file>qml/Heatmap.qml</file>
         <file>qml/AppSerial.qml</file>
-        <file>qml/Heatmap3D.qml</file>
         <file>qml/SerialCustomButton.qml</file>
-        <file>qml/CustomButtonWindow.qml</file>
         <file>js/fileStringTools.js</file>
         <file>qml/AppSerialMenu.qml</file>
         <file>qtquickcontrols2.conf</file>

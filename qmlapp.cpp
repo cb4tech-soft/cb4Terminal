@@ -11,7 +11,6 @@
 #include "serialmanager.h"
 #include "pluginInfo.h"
 #include "qml/myscreeninfo.h"
-#include "qml/heatmapdata.h"
 #include "tools/debug_info.h"
 #include "tools/appinfo.h"
 #include "componentcachemanager.h"
@@ -34,7 +33,6 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
 
     SerialManager::registerQml();
     MyScreenInfo::registerQml();
-    HeatMapData::registerQml();
     PluginInfo::registerQml();
     ComponentCacheManager::registerQml();
     AppInfo::registerQml();

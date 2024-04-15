@@ -76,4 +76,12 @@ Rectangle {
             }
         }
     }
+    Button{
+        text: "Close"
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {
+            root.visible = false
+        }
+    }
 }

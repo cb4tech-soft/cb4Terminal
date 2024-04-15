@@ -65,60 +65,6 @@ MenuBar {
        }
    }
    Menu {
-       title: "Addon"
-       Action {
-           text: "Heatmap"
-           onTriggered: {
-                console.log("opening heatmap")
-                heatmapLoader.source = "Heatmap.qml"
-                heatmapLoader.active = true
-                heatmapLoader.item.visible = true
-                var posX = root.x + root.width
-                var posY = root.y
-                var screenRect = MyScreenInfo.getScreenInfo( root.x ,  root.y)
-                if (posX + heatmapLoader.item.width >= screenRect.x + screenRect.width - 50)
-                {
-                   console.log("update windows pos ", posX + heatmapLoader.item.width)
-                   posX = screenRect.x + screenRect.width - heatmapLoader.item.width - 50
-                }
-                if (posY + heatmapLoader.item.height >= screenRect.y + screenRect.height - 50)
-                {
-                   posY = screenRect.y + screenRect.height - heatmapLoader.item.height-50
-                }
-
-                console.log("windows pos = ", posX)
-                heatmapLoader.item.x = posX
-                heatmapLoader.item.y = posY
-           }
-       }
-       Action {
-           text: "CustomButton"
-           onTriggered: {
-                console.log("opening CustomButtonWindow.qml")
-                customButton.source = "CustomButtonWindow.qml"
-                customButton.active = true
-                customButton.item.visible = true
-                var posX = root.x
-                var posY = root.y + root.height
-                var screenRect = MyScreenInfo.getScreenInfo( root.x ,  root.y)
-                if (posX + customButton.item.width >= screenRect.x + screenRect.width - 50)
-                {
-                   console.log("update windows pos ", posX + customButton.item.width)
-                   posX = screenRect.x + screenRect.width - customButton.item.width - 50
-                }
-                if (posY + customButton.item.height >= screenRect.y + screenRect.height - 50)
-                {
-                   posY = screenRect.y + screenRect.height - customButton.item.height-50
-                }
-
-                console.log("windows pos = ", posX)
-                customButton.item.x = posX
-                customButton.item.y = posY
-
-           }
-       }
-   }
-   Menu {
         title: "Plugin"
         id: pluginMenu
         Instantiator {
