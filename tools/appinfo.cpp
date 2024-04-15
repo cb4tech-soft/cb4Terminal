@@ -54,6 +54,7 @@ void AppInfo::setName(const QString &newName)
 
 QString AppInfo::getVersionName()
 {
+    qDebug() << "getVersionName" << appVersionName;
 #ifdef APP_VERSION_NAME
     return appVersionName;
 #else

@@ -1,7 +1,7 @@
 QT += quick serialport qml core
 QT += quickcontrols2
 
-VERSION = 2.1.1.0 #major.minor.patch.build
+VERSION = 2.1.1.3 #major.minor.patch.build
 DEFINES += APP_VERSION_NAME=\\\"$$VERSION\\\"
 DEFINES += APP_VERSION_CODE=\\\"$$VERSION\\\"
 
@@ -13,9 +13,10 @@ windows: {
     } else {
         DESTDIR = $$PWD/bin/windows/debug
     }
-    appinfo.obj.depends = FORCE
-    QMAKE_EXTRA_TARGETS += appinfo.obj
-    PRE_TARGETDEPS += appinfo.obj
+    appinfo.depends = FORCE
+    appinfo.commands = -$(DEL_FILE) release\\appinfo.o $$escape_expand(\n\t)-$(DEL_FILE) release\\appinfo.obj
+    QMAKE_EXTRA_TARGETS += appinfo
+    PRE_TARGETDEPS += appinfo
 
     QMAKE_POST_LINK =  windeployqt $$shell_path($$DESTDIR/$${TARGET}.exe) --qmldir $$PWD/qml --no-translations
 }
