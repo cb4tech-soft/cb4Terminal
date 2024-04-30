@@ -110,37 +110,30 @@ Item {
         anchors.bottomMargin: 4
         anchors.rightMargin: 8
         anchors.right: parent.right
+
+        width: (advancedMode)?Screen.pixelDensity*30 : Screen.pixelDensity*25
         property bool advancedMode: false
         SpinBox{
             id:repeatTime
-            Layout.preferredHeight: root.height - sendButton.height - 4
+            Layout.fillWidth: true
+            Layout.preferredHeight: sendButton.height - 4
             visible: sendLayout.advancedMode
             stepSize: 100
             to: 10000
             from: 1
             value: 500
             editable: true
-            Layout.topMargin: 1
-
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
         }
 
         Button{
             id: sendButton
-            Timer{
-                id:timerRepeat
-                repeat: true
-                interval: repeatTime.value
-                running: false
-                onTriggered: {
-                    triggerSend()
-                }
-            }
-
             text: (sendLayout.advancedMode) ?
                      (!timerRepeat.running) ? "Send " + repeatTime.value + " ms" : "stop"
                                             : "Send"
             Layout.bottomMargin: 3
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.preferredHeight: (root.height > 60) ? 40 : root.height - 20
             onClicked: {
                 if (sendLayout.advancedMode) {
@@ -158,6 +151,16 @@ Item {
             onPressAndHold: {
                 sendLayout.advancedMode = !sendLayout.advancedMode
             }
+            Timer{
+                id:timerRepeat
+                repeat: true
+                interval: repeatTime.value
+                running: false
+                onTriggered: {
+                    triggerSend()
+                }
+            }
+
         }
     }
     ScrollView{

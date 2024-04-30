@@ -10,6 +10,10 @@ Rectangle {
             description: "New window"
         }
         ListElement{
+            shortcut: "Ctrl + Q"
+            description: "Quit"
+        }
+        ListElement{
             shortcut: "Ctrl + L"
             description: "Clear display"
         }

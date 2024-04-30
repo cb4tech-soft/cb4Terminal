@@ -58,10 +58,21 @@ MenuBar {
            }
        }
 
+       MenuSeparator{}
+    /*
+       Action { text: "export";
+           onTriggered: {
+               exportView.open()
+           }
+       }
+    */
+
        MenuSeparator { }
 
-       Action { text: qsTr("&Quit")
-                onTriggered: Qt.quit()
+       ShortcutMenuItem { text: "Quit"; width:implicitBackgroundWidth
+            sequence: "Ctrl+Q";
+           onTriggered: Qt.quit()
+
        }
    }
    Menu {

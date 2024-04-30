@@ -9,11 +9,12 @@
 
 #include "viewpage/viewpage.h"
 #include "serialmanager.h"
-#include "pluginInfo.h"
-#include "qml/myscreeninfo.h"
+#include "singleton/pluginInfo.h"
+#include "singleton/myscreeninfo.h"
 #include "tools/debug_info.h"
 #include "tools/appinfo.h"
-#include "componentcachemanager.h"
+#include "singleton/softwarelauncher.h"
+#include "singleton/componentcachemanager.h"
 #include <QGuiApplication>
 #ifdef Q_OS_WIN
 
@@ -36,6 +37,7 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     PluginInfo::registerQml();
     ComponentCacheManager::registerQml();
     AppInfo::registerQml();
+    SoftwareLauncher::registerQml();
 //    parent->setTitle(AppInfo::instance()->getVersionName());
     QDBG_YELLOW() << QGuiApplication::arguments();
     load(QUrl("qrc:/qml/main.qml"));

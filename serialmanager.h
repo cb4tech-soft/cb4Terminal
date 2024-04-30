@@ -16,6 +16,7 @@ Q_OBJECT
 public:
     explicit SerialInfo(QObject* parent = nullptr) : QObject(parent) {}
     Q_INVOKABLE QStringList getPortList();
+    Q_INVOKABLE QString getInfo(QString com);
 
 
 signals:

@@ -38,5 +38,7 @@
         <file>qtquickcontrols2.conf</file>
         <file>qml/ShortcutMenuItem.qml</file>
         <file>qml/ShortcutHelp.qml</file>
+        <file>qml/AppShortcut.qml</file>
+        <file>qml/ExportView.qml</file>
     </qresource>
 </RCC>

@@ -34,23 +34,24 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        componentcachemanager.cpp \
+        singleton/componentcachemanager.cpp \
         main.cpp \
-        pluginInfo.cpp \
-        qml/myscreeninfo.cpp \
+        singleton/pluginInfo.cpp \
+        singleton/myscreeninfo.cpp \
         qmlapp.cpp \
         serialmanager.cpp \
+        singleton/softwarelauncher.cpp \
         tools/appinfo.cpp \
         tools/crashReportTool.cpp \
         viewpage/viewpage.cpp
 
 HEADERS += \
-        cb4tools/debug_info.h \
-        componentcachemanager.h \
-        pluginInfo.h \
-        qml/myscreeninfo.h \
+        singleton/componentcachemanager.h \
+        singleton/pluginInfo.h \
+        singleton/myscreeninfo.h \
         qmlapp.h \
         serialmanager.h \
+        singleton/softwarelauncher.h \
         tools/appinfo.h \
         tools/crashReportTool.h \
         tools/debug_info.h \

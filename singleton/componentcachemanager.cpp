@@ -6,6 +6,7 @@
 #include <QQmlEngine>
 #include <QProcess>
 #include <QGuiApplication>
+#include <QClipboard>
 
 ComponentCacheManager *ComponentCacheManager::m_pThis = nullptr;
 
@@ -46,5 +47,11 @@ void ComponentCacheManager::createNewInstance()
     QString programPath = QGuiApplication::applicationFilePath();
     qDebug() << "Starting new instance: " << programPath;
     QProcess::startDetached(programPath);
+}
+
+void ComponentCacheManager::copyToClipboard(QString text)
+{
+    QClipboard *clipboard = QGuiApplication::clipboard();
+    clipboard->setText(text);
 }
 

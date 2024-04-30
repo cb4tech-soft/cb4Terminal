@@ -391,7 +391,7 @@ void SerialManager::setStopBits(int newStopBits)
     emit stopBitsChanged();
 }
 
- QStringList SerialInfo::getPortList()
+QStringList SerialInfo::getPortList()
 {
     QList<QSerialPortInfo> portList = QSerialPortInfo::availablePorts();
     QStringList result;
@@ -402,7 +402,19 @@ void SerialManager::setStopBits(int newStopBits)
 
     }
     return result;
- }
+}
+
+QString SerialInfo::getInfo(QString com)
+{
+    QSerialPortInfo info(com);
+    QString result;
+    result = "name : " + com + "\n";
+    result += "description : " + info.description() + "\n";
+    result += "vendor : " + QString::number(info.vendorIdentifier()) + " product : " + QString::number(info.productIdentifier());
+    //= info.description();
+    result += "\n";
+    return result;
+}
 
  int SerialManager::isConnected() const
  {

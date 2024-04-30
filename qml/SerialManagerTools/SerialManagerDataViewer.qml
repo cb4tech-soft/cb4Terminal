@@ -3,6 +3,7 @@ import QtQuick.Controls.Material
 import Qt.labs.platform
 import  "../Style"
 import SerialManager
+import ComponentCacheManager
 
 import Qt.labs.settings
 Item {
@@ -17,7 +18,7 @@ Item {
     signal lineDataAppend(string lineData);
 
     function logToText() {
-        var chaine =[]
+        var chaine = []
         console.log("logToText - ")
         for(let i = 0; i < serialData.count; i++) {
             if(ctrlTime.checked) {
@@ -131,9 +132,10 @@ Item {
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         title: "Select save destination :"
         onAccepted: {
-                        var log = logToText()
-                        console.log(this.currentFolder)
-                        manager.saveToFile(log, this.currentFolder, ctrlTime.checked)
+            var log = logToText()
+            console.log(this.currentFolder)
+            ComponentCacheManager.copyToClipboard(log)
+//                        manager.saveToFile(log, this.currentFolder, ctrlTime.checked)
             }
     }
 
@@ -177,7 +179,12 @@ Item {
             Button{
                 id:ctrlSave
                 text: "Save Log"
-                onClicked: saveDialog.open()
+                onClicked: {
+                    var log = logToText()
+//                    console.log()
+                    ComponentCacheManager.copyToClipboard(log);
+//                    saveDialog.open()
+                }
                 height: parent.height
             }
             CheckBox{

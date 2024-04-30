@@ -30,9 +30,11 @@ MenuItem {
         Label {
             text: _shortcut.nativeText
             verticalAlignment: Qt.AlignVCenter
-            Layout.preferredWidth: root.width / 4
+            Layout.preferredWidth: root.width / 3
             fontSizeMode: Text.Fit
             Layout.rightMargin: 4
+            horizontalAlignment: Text.AlignRight
+
         }
     }
 }

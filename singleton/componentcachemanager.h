@@ -15,6 +15,7 @@ public:
 
     Q_INVOKABLE void trim() { instance_engine->clearComponentCache(); }
     Q_INVOKABLE void createNewInstance();
+    Q_INVOKABLE void copyToClipboard(QString text);
 
     QQmlEngine *instance_engine = nullptr;
 
