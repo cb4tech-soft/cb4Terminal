@@ -1,4 +1,4 @@
-#CB4Terminal: Unleash the Serial Beast
+# CB4Terminal: Unleash the Serial Beast
 
 Unleash the potential of CB4Terminal and discover how easy and exciting serial communication can be with our advanced features and dynamic plugin system.
 
