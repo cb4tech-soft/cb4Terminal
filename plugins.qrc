@@ -6,8 +6,6 @@
         <file>plugin/AnimationTester/AnimationTester.qml</file>
         <file>plugin/Burst/Burst.qml</file>
         <file>plugin/SeqSender/SeqSender.qml</file>
-        <file>plugin/BancTest_citynox/BancTest_citynox.qml</file>
-        <file>plugin/BancTest_citynox/Test_Runner.qml</file>
         <file>plugin/Readme.md</file>
     </qresource>
 </RCC>

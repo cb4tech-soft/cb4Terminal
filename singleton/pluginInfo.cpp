@@ -116,8 +116,8 @@ void PluginInfo::extractQrcPlugin()
             {
                 dir.remove(pluginFolder + fileInfo.fileName());
             }
-            dir.mkpath(dir.absolutePath());
             */
+            dir.mkpath(dir.absolutePath());
         }
     }
 
