@@ -1,7 +1,7 @@
 QT += quick serialport qml core
 QT += quickcontrols2
 
-VERSION = 2.1.1.3 #major.minor.patch.build
+VERSION = 2.2.0.1 #major.minor.patch.build
 DEFINES += APP_VERSION_NAME=\\\"$$VERSION\\\"
 DEFINES += APP_VERSION_CODE=\\\"$$VERSION\\\"
 

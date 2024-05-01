@@ -93,8 +93,11 @@ void PluginInfo::extractQrcPlugin()
                 if (newVersion)
                 {
                     f.setPermissions((QFileDevice::Permission)0x7777);
+
+                    /*
                     qDebug()<<"remove old version of plugin: " <<  fileInfo.fileName();
                     qDebug()<<" remove result" << f.remove();
+                    */
                 }
                 else
                 {
@@ -108,12 +111,13 @@ void PluginInfo::extractQrcPlugin()
         {
             QDir dir(pluginFolder + fileInfo.fileName());
             QDBG_GREEN() << "dir: " << pluginFolder + fileInfo.fileName() << DBG_CLR_RESET;
+            /*
             if (dir.exists())
             {
                 dir.remove(pluginFolder + fileInfo.fileName());
-
             }
             dir.mkpath(dir.absolutePath());
+            */
         }
     }
 
