@@ -111,8 +111,9 @@ Item {
         anchors.rightMargin: 8
         anchors.right: parent.right
 
-        width: (advancedMode)?Screen.pixelDensity*30 : Screen.pixelDensity*25
+        width: (advancedMode)?(repeatTime.implicitWidth): Screen.pixelDensity*25
         property bool advancedMode: false
+
         SpinBox{
             id:repeatTime
             Layout.fillWidth: true
@@ -124,6 +125,12 @@ Item {
             value: 500
             editable: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+
+            TextMetrics{
+                id:     t_metrics
+                font:   repeatTime.font
+                text:   repeatTime.displayText
+            }
         }
 
         Button{

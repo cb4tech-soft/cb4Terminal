@@ -18,7 +18,7 @@ PluginInfo* PluginInfo::m_pThis = nullptr;
 PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
 {
 #ifdef Q_OS_WINDOWS
-    qt_ntfs_permission_lookup++;
+    QNtfsPermissionCheckGuard permissionGuard;
 #endif
     qDebug()<<"PluginInfo constructor";
     QDir d(pluginFolder);
@@ -40,6 +40,7 @@ PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
 // extract qml plugins from plugins.qrc to plugin folder
 void PluginInfo::extractQrcPlugin()
 {
+    QNtfsPermissionCheckGuard permissionGuard;
     QDir d(pluginFolder);
     QFile versionFile(pluginFolder + BUILD_VERSION_FILE);
     bool newVersion = false;
@@ -91,7 +92,7 @@ void PluginInfo::extractQrcPlugin()
                 QString filePath = QFileInfo(f).absoluteFilePath();
                 if (newVersion)
                 {
-                    f.setPermissions((QFileDevice::Permission)0x777);
+                    f.setPermissions((QFileDevice::Permission)0x7777);
                     qDebug()<<"remove old version of plugin: " <<  fileInfo.fileName();
                     qDebug()<<" remove result" << f.remove();
                 }
@@ -105,12 +106,14 @@ void PluginInfo::extractQrcPlugin()
         }
         else if (fileInfo.isDir())
         {
-            QDBG_GREEN() << "dir: " << path << DBG_CLR_RESET;
             QDir dir(pluginFolder + fileInfo.fileName());
-            if (!dir.exists())
+            QDBG_GREEN() << "dir: " << pluginFolder + fileInfo.fileName() << DBG_CLR_RESET;
+            if (dir.exists())
             {
-                dir.mkpath(dir.absolutePath());
+                dir.remove(pluginFolder + fileInfo.fileName());
+
             }
+            dir.mkpath(dir.absolutePath());
         }
     }
 

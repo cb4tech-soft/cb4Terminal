@@ -1,5 +1,6 @@
 
 #include <QDebug>
+#include <QGuiApplication>
 
 #include <QtQml/QQmlContext>
 #include <QQuickStyle>
@@ -15,7 +16,8 @@
 #include "tools/appinfo.h"
 #include "singleton/softwarelauncher.h"
 #include "singleton/componentcachemanager.h"
-#include <QGuiApplication>
+#include "singleton/fileutils.h"
+
 #ifdef Q_OS_WIN
 
 
@@ -38,6 +40,7 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     ComponentCacheManager::registerQml();
     AppInfo::registerQml();
     SoftwareLauncher::registerQml();
+    FileUtils::registerQml();
 //    parent->setTitle(AppInfo::instance()->getVersionName());
     QDBG_YELLOW() << QGuiApplication::arguments();
     load(QUrl("qrc:/qml/main.qml"));

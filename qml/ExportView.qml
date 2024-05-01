@@ -11,6 +11,12 @@ ApplicationWindow {
         id: column
         anchors.fill: parent
         height: Screen.pixelDensity * 10
+        Label{
+            text: "Working on it, wait for the next update"
+            horizontalAlignment: Text.AlignHCenter
+            Layout.fillWidth: true
+
+        }
         RowLayout{
             id: row
             Layout.fillWidth: true

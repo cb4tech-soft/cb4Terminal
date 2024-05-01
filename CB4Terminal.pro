@@ -10,15 +10,19 @@ windows: {
     #check if release or debug
     CONFIG(release, debug|release) {
         DESTDIR = $$PWD/bin/windows/release
+        appinfo.depends = FORCE
+        appinfo.commands = -$(DEL_FILE) release\\appinfo.o $$escape_expand(\n\t)-$(DEL_FILE) release\\appinfo.obj
+        QMAKE_EXTRA_TARGETS += appinfo
+        PRE_TARGETDEPS += appinfo
+        QMAKE_POST_LINK =  windeployqt $$shell_path($$DESTDIR/$${TARGET}.exe) --qmldir $$PWD/qml --no-translations
     } else {
-        DESTDIR = $$PWD/bin/windows/debug
+#        DESTDIR = $$PWD/bin/windows/debug
+        delPlugin.depends = FORCE
+        delPlugin.commands =  -$$QMAKE_DEL_TREE plugin
+        QMAKE_EXTRA_TARGETS += delPlugin
+        PRE_TARGETDEPS += delPlugin
     }
-    appinfo.depends = FORCE
-    appinfo.commands = -$(DEL_FILE) release\\appinfo.o $$escape_expand(\n\t)-$(DEL_FILE) release\\appinfo.obj
-    QMAKE_EXTRA_TARGETS += appinfo
-    PRE_TARGETDEPS += appinfo
 
-    QMAKE_POST_LINK =  windeployqt $$shell_path($$DESTDIR/$${TARGET}.exe) --qmldir $$PWD/qml --no-translations
 }
 
 android: {
@@ -26,6 +30,8 @@ android: {
 #   QMAKE_LINK += -nostdlib++
 #   QMAKE_LFLAGS += -stdlib=libstdc++
 }
+
+
 CONFIG += c++11
 
 
@@ -36,6 +42,7 @@ CONFIG += c++11
 SOURCES += \
         singleton/componentcachemanager.cpp \
         main.cpp \
+        singleton/fileutils.cpp \
         singleton/pluginInfo.cpp \
         singleton/myscreeninfo.cpp \
         qmlapp.cpp \
@@ -47,6 +54,7 @@ SOURCES += \
 
 HEADERS += \
         singleton/componentcachemanager.h \
+        singleton/fileutils.h \
         singleton/pluginInfo.h \
         singleton/myscreeninfo.h \
         qmlapp.h \

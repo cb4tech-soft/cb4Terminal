@@ -59,13 +59,18 @@ MenuBar {
        }
 
        MenuSeparator{}
-    /*
+
        Action { text: "export";
            onTriggered: {
-               exportView.open()
+               var screenRect = MyScreenInfo.getScreenInfo(root.x ,  root.y)
+               exportView.height = screenRect.height/2
+               exportView.width = screenRect.width/2
+               exportView.x = screenRect.x + screenRect.width/2 - exportView.width/2
+               exportView.y = screenRect.y + screenRect.height/2 - exportView.height/2
+               exportView.show()
            }
        }
-    */
+
 
        MenuSeparator { }
 

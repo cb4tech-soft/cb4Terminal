@@ -4,3 +4,7 @@ CB4Terminal.pro.user
 *.user
 *.user
 /bin
+plugin/BancTest_citynox/BancTest_citynox.qml
+plugin/BancTest_citynox/Test_Runner.qml
+plugin/BancTest_citynox/Test_Runner.qml
+/plugin/BancTest_citynox

@@ -11,7 +11,6 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     qDebug() << "Starting app";
     QGuiApplication app(argc, argv);
     qDebug() << "ask permission";

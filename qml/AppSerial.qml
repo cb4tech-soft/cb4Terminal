@@ -113,8 +113,8 @@ ApplicationWindow {
 
     ExportView{
         id: exportView
-        width : parent.width * 0.8
-        height : parent.height * 0.8
+        width : ScreenInfo.width * 0.8
+        height :ScreenInfo.height * 0.8
     }
 
     SerialTool.ComPluggedPopup {
