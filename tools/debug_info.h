@@ -30,13 +30,8 @@
 #define QDBG_FUNCNAME_GREEN(msg) qDebug() << DBG_CLR_GREEN << msg << Q_FUNC_INFO << DBG_CLR_RESET
 #define QDBG_FUNCNAME_YELLOW(msg) qDebug() << DBG_CLR_YELLOW << msg << Q_FUNC_INFO << DBG_CLR_RESET
 #define QDBG_FUNCNAME_BLUE(msg) qDebug() << DBG_CLR_BLUE << msg << Q_FUNC_INFO << DBG_CLR_RESET
-#define QDBG_FUNCNAME_MAGENTA(msg) \
-    qDebug() << DBG_CLR_MAGENTA << msg << Q_FUNC_INFO << DBG_CLR_RESET
+#define QDBG_FUNCNAME_MAGENTA(msg) qDebug() << DBG_CLR_MAGENTA << msg << Q_FUNC_INFO << DBG_CLR_RESET
 #define QDBG_FUNCNAME_CYAN(msg) qDebug() << DBG_CLR_CYAN << msg << Q_FUNC_INFO << DBG_CLR_RESET
 
-#define COMPILATION_DATE_TIME \
-    QString(QDateTime::fromString(QStringLiteral(__DATE__) + QStringLiteral(" ") \
-        + QStringLiteral(__TIME__), \
-        "MMM  d yyyy hh:mm:ss").toString("MMddyy_hhmmss"))
 
 #endif // DEBUG_INFO_H

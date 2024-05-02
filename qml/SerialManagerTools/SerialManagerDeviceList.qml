@@ -12,9 +12,6 @@ ComboBox{
     }
     property alias port: port
     property bool scanPort: false
-    onScanPortChanged: {
-        console.log("scan changed " + scanPort)
-    }
 
     signal newComPort(var portName)
     function compareArrays(arr1, arr2) {

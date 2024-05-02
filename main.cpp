@@ -11,12 +11,10 @@
 
 int main(int argc, char *argv[])
 {
-    qDebug() << "Starting app";
     QGuiApplication app(argc, argv);
-    qDebug() << "ask permission";
 
     qputenv("QSG_RHI_BACKEND", "opengl");
-    qDebug() << "Starting view";
+
     app.setOrganizationName("CB4Tech");
     app.setOrganizationDomain("cb4tech.com");
     app.setApplicationName("CB4Terminal");

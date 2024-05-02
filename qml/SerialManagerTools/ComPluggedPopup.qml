@@ -28,10 +28,6 @@ Popup {
     onOpened: {
         timer.running = true
     }
-    onComListChanged: {
-        console.log("update comlist ", popup.comList)
-
-    }
 
     Shortcut {
         sequence: "Esc"

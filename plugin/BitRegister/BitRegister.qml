@@ -5,9 +5,6 @@ import QtQuick.Layouts
 ApplicationWindow {
     width: 1300
     height: 150
-    onWidthChanged: {
-        console.log(width)
-    }
 
     property int registerValue: 42
 
@@ -76,10 +73,6 @@ ApplicationWindow {
                     visible: index !== 31  // hide the last separator
                     z:0
                     Layout.fillHeight: true
-//                    Rectangle{
-//                        anchors.fill: parent
-//                        color:"#5dff0000"
-//                    }
                 }
             }
         }
@@ -105,7 +98,6 @@ ApplicationWindow {
                                 registerValue = event.key
                             }
                         }
-//        text: "Hex: " + decimalToHexString(registerValue) + " | Dec: " + registerValue
     }
 
 

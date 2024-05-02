@@ -10,6 +10,8 @@
 #include <QFile>
 #include <QTimer>
 #include <QDirIterator>
+#include "tools/appinfo.h"
+
 #ifdef Q_OS_WINDOWS
 extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
 #endif
@@ -20,7 +22,6 @@ PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
 #ifdef Q_OS_WINDOWS
     QNtfsPermissionCheckGuard permissionGuard;
 #endif
-    qDebug()<<"PluginInfo constructor";
     QDir d(pluginFolder);
     if (!d.exists())
     {
@@ -34,7 +35,7 @@ PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
     updatePluginList();
     watcher.addPath(pluginFolder);
     connect(&watcher, &QFileSystemWatcher::directoryChanged, this, &PluginInfo::updatePluginList);
-    compilationDateTime = COMPILATION_DATE_TIME;
+    compilationDateTime = AppInfo::instance()->getCompilationDateTime();
 }
 
 // extract qml plugins from plugins.qrc to plugin folder

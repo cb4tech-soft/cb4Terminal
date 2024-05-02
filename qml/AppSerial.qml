@@ -37,8 +37,6 @@ ApplicationWindow {
         root.height = Math.min(MyScreenInfo.getScreenInfo(x,  y).height - 100, 850)
         root.y = MyScreenInfo.getScreenInfo(x,  y).height - root.height - 100
         if (root.y < 25) root.y = 25
-
-        console.log("windows position : ", root.y)
     }
 
     Settings {

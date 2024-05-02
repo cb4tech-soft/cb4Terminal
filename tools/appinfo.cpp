@@ -11,6 +11,8 @@ const QString appVersionName(APP_VERSION_NAME);
 const QString appVersionCode(APP_VERSION_CODE);
 #endif
 
+const QString compilationDateTime(QDateTime::fromString(QStringLiteral(__DATE__) + QStringLiteral(" ") + QStringLiteral(__TIME__), "MMM  d yyyy hh:mm:ss").toString("MMddyy_hhmmss"));
+
 AppInfo *AppInfo::m_pThis = nullptr;
 
 AppInfo::AppInfo(QObject *parent)
@@ -39,17 +41,9 @@ QObject *AppInfo::qmlInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
     return AppInfo::instance();
 }
 
-QString AppInfo::name() const
+QString AppInfo::getCompilationDateTime()
 {
-    return m_name;
-}
-
-void AppInfo::setName(const QString &newName)
-{
-    if (m_name == newName)
-        return;
-    m_name = newName;
-    emit nameChanged();
+    return compilationDateTime;
 }
 
 QString AppInfo::getVersionName()
