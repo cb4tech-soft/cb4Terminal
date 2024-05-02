@@ -14,8 +14,6 @@ MyScreenInfo* MyScreenInfo::m_pThis = nullptr;
 
 MyScreenInfo::MyScreenInfo(QObject *parent) : QObject(parent)
 {
-    qDebug()<< Q_FUNC_INFO ;
-
 }
 
 void MyScreenInfo::registerQml()

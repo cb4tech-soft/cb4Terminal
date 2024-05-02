@@ -13,7 +13,7 @@ import MyScreenInfo
 
 import PluginInfo
 
-import Qt.labs.settings
+import QtCore
 import 'qrc:/js/fileStringTools.js' as FileStringTools
 
 import ComponentCacheManager

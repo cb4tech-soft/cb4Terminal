@@ -5,7 +5,7 @@ import  "../Style"
 import SerialManager
 import ComponentCacheManager
 
-import Qt.labs.settings
+import QtCore
 Item {
     id: appRectangle
     width: 400

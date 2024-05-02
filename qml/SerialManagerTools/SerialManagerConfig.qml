@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.11
 
 import "../Style"
 import SerialManager 1.0
-import Qt.labs.settings
+import QtCore
 
 
 Item {
