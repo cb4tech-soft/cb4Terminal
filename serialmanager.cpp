@@ -145,7 +145,7 @@ QString SerialManager::readLine()
 {
     if (Q_LIKELY(port != nullptr))
     {
-        QString dataString = QString::fromUtf8(port->readLine());
+        QString dataString = QString::fromLatin1(port->readLine());
         if(port->bytesAvailable())
         {
             timer->start(m_receiveTimeout);
