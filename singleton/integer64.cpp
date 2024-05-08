@@ -57,7 +57,7 @@ UInteger64::UInteger64(QObject *parent)
 
 void UInteger64::registerQml()
 {
-    qmlRegisterType<Integer64>("UInteger64", 1, 0, "UInteger64");
+    qmlRegisterType<UInteger64>("UInteger64", 1, 0, "UInteger64");
 }
 
 QString UInteger64::value() const
@@ -81,6 +81,7 @@ QString UInteger64::toString()
         m_value.append(0);
     }
     uint64_t valueInt = *((uint64_t*)m_value.toStdString().c_str());
+
     return QString::number(valueInt);
 }
 
