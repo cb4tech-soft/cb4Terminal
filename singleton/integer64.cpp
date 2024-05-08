@@ -9,9 +9,18 @@ Integer64::Integer64(QObject *parent)
     : QObject(parent)
 {}
 
+UInteger64::UInteger64(QObject *parent)
+    : QObject(parent)
+{}
+
 void Integer64::registerQml()
 {
     qmlRegisterType<Integer64>("Integer64", 1, 0, "Integer64");
+}
+
+void UInteger64::registerQml()
+{
+    qmlRegisterType<UInteger64>("UInteger64", 1, 0, "UInteger64");
 }
 
 QString Integer64::value() const
@@ -48,16 +57,6 @@ QDateTime Integer64::toDate()
     QDateTime dt;
     dt.setMSecsSinceEpoch(valueInt);
     return dt;
-}
-
-
-UInteger64::UInteger64(QObject *parent)
-    : QObject(parent)
-{}
-
-void UInteger64::registerQml()
-{
-    qmlRegisterType<UInteger64>("UInteger64", 1, 0, "UInteger64");
 }
 
 QString UInteger64::value() const
