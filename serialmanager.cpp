@@ -88,7 +88,6 @@ bool SerialManager::isLineAvailable()
 
 void SerialManager::checkData()
 {
-    qDebug() << "CheckData !";
     if (port->canReadLine())
         emit lineAvailable();
     //emit dataAvailable();
@@ -96,7 +95,7 @@ void SerialManager::checkData()
         if(port->bytesAvailable() > BUFFERSIZE) {
             emit dataAvailable();
        } else {
-            timer->start(100);
+            timer->start(m_receiveTimeout);
         }
     }
 }
@@ -149,7 +148,7 @@ QString SerialManager::readLine()
         QString dataString = QString::fromUtf8(port->readLine());
         if(port->bytesAvailable())
         {
-            timer->start(100);
+            timer->start(m_receiveTimeout);
         }
         else
             timer->stop();
@@ -427,4 +426,17 @@ QString SerialInfo::getInfo(QString com)
          return;
      m_isConnected = newIsConnected;
      emit isConnectedChanged();
+ }
+
+ int SerialManager::receiveTimeout() const
+ {
+     return m_receiveTimeout;
+ }
+
+ void SerialManager::setReceiveTimeout(int newReceiveTimeout)
+ {
+     if (m_receiveTimeout == newReceiveTimeout)
+         return;
+     m_receiveTimeout = newReceiveTimeout;
+     emit receiveTimeoutChanged();
  }

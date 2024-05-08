@@ -38,6 +38,7 @@ class SerialManager : public QObject
     Q_PROPERTY(int parity READ parity WRITE setParity NOTIFY parityChanged);
     Q_PROPERTY(int stopBits READ stopBits WRITE setStopBits NOTIFY stopBitsChanged);
     Q_PROPERTY(int isConnected READ isConnected WRITE setIsConnected NOTIFY isConnectedChanged);
+    Q_PROPERTY(int receiveTimeout READ receiveTimeout WRITE setReceiveTimeout NOTIFY receiveTimeoutChanged);
     Q_ENUMS(QSerialPort::BaudRate);
     Q_ENUMS(QSerialPort::DataBits);
     Q_ENUMS(QSerialPort::FlowControl);
@@ -81,6 +82,9 @@ public:
     int isConnected() const;
     void setIsConnected(int newIsConnected);
 
+    int receiveTimeout() const;
+    void setReceiveTimeout(int newReceiveTimeout);
+
 signals:
     void dataAvailable();
     void lineAvailable();
@@ -93,6 +97,8 @@ signals:
 
 
     void isConnectedChanged();
+
+    void receiveTimeoutChanged();
 
 private slots:
     void checkData();
@@ -110,6 +116,7 @@ private:
     int m_parity = 0;
     int m_stopBits = 0;
     int m_isConnected;
+    int m_receiveTimeout = 100;
 };
 
 
