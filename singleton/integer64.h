@@ -47,6 +47,7 @@ public:
 
     Q_INVOKABLE QString toString();
     Q_INVOKABLE QDateTime toDate(enum BYTE_ORDER byteOrder = LSB_FIRST);
+    Q_INVOKABLE QString u64StringToHex(QString id, char separator = ' ');
 
 public slots:
 

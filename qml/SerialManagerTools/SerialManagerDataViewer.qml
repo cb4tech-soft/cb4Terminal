@@ -37,16 +37,12 @@ Item {
 
     function lineUpdate()
     {
-        console.log("lineUpdate - ")
         while (manager.isLineAvailable())
         {
             var dataLine = manager.readLine()
             lineDataAppend(dataLine);
-            console.log("lineUpdate - ", dataLine)
             if (dataLine[dataLine.length-1] == '\n')
             {
-                console.log("lastChar - ", dataLine[dataLine.length-1])
-                console.log("len - ", dataLine.length)
                 dataLine =  dataLine.slice(0, dataLine.length-1)
             }
             append(dataLine);
@@ -54,9 +50,7 @@ Item {
     }
 
     function dataUpdate() {
-        console.log("data update - ")
         var dataLine = manager.readAll()
-        console.log("data update - ", dataLine)
         append(dataLine)
 
     }

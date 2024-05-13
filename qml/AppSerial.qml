@@ -28,6 +28,7 @@ ApplicationWindow {
     property alias serManager: serManager
     property alias dataViewer: dataViewer
     property alias exportView: exportView
+    property alias serialManagerLineSender: serialManagerLineSender
 
     visible: true
     width:850

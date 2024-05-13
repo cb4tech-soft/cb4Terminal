@@ -122,3 +122,19 @@ QDateTime UInteger64::toDate(enum BYTE_ORDER byteOrder)
     }
     return dt;
 }
+
+QString UInteger64::u64StringToHex(QString id, char separator)
+{
+    uint64_t valueInt = id.toULongLong();
+    QByteArray value;
+    value.setNum(valueInt, 16);
+    if (value.length() % 2)
+    {
+        value.prepend('0');
+    }
+    while (value.length() < 16)
+    {
+        value.prepend('0');
+    }
+    return value;
+}
