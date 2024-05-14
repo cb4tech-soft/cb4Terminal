@@ -86,6 +86,12 @@ ApplicationWindow {
                         pluginLoaderItem.item.receiveString(lineData);
                     }
                 }
+                function onDataAppend(data) {
+                    if (pluginLoaderItem.active && pluginLoaderItem.item && pluginLoaderItem.item.receiveDataFeatureEnable)
+                    {
+                        pluginLoaderItem.item.receiveData(data);
+                    }
+                }
             }
 
             Component.onCompleted: {
@@ -158,12 +164,6 @@ ApplicationWindow {
                 id:dataViewer
                 SplitView.fillHeight: true
                 manager : serManager
-                onLineDataAppend: function(lineData) {
-                    if (heatmapLoader.active && heatmapLoader.item)
-                    {
-                        heatmapLoader.item.datalineAppend(lineData);
-                    }
-                }
             }
 
             SerialTool.SerialManagerLineSender {

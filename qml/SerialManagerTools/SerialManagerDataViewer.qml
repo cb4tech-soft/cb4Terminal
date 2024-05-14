@@ -16,6 +16,7 @@ Item {
 
     property SerialManager manager
     signal lineDataAppend(string lineData);
+    signal dataAppend(string lineData);
 
     function logToText() {
         var chaine = []
@@ -56,8 +57,8 @@ Item {
         console.log("data update - ")
         var dataLine = manager.readAll()
         console.log("data update - ", dataLine)
-
         append(dataLine)
+
     }
 
     Connections {
@@ -125,6 +126,7 @@ Item {
 
         //console.log("append - dateString -", dateString)
         serialData.append({"timestamp": dateString ,"serData": outData, "isSend": false})
+        dataAppend(outData);
     }
 
     FolderDialog{

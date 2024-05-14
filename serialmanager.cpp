@@ -163,8 +163,7 @@ QString SerialManager::readAll()
 {
     if (Q_LIKELY(port != nullptr))
     {
-        QByteArray byteString = port->readAll();
-        QString dataString = QString::fromLocal8Bit(byteString);
+        QString dataString = QString::fromLatin1(port->readAll());
         if(port->bytesAvailable())
         {
             timer->start(100);

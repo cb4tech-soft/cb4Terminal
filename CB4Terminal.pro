@@ -43,6 +43,7 @@ SOURCES += \
         singleton/componentcachemanager.cpp \
         main.cpp \
         singleton/fileutils.cpp \
+        singleton/integer64.cpp \
         singleton/pluginInfo.cpp \
         singleton/myscreeninfo.cpp \
         qmlapp.cpp \
@@ -55,6 +56,7 @@ SOURCES += \
 HEADERS += \
         singleton/componentcachemanager.h \
         singleton/fileutils.h \
+        singleton/integer64.h \
         singleton/pluginInfo.h \
         singleton/myscreeninfo.h \
         qmlapp.h \

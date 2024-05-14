@@ -17,6 +17,7 @@
 #include "singleton/softwarelauncher.h"
 #include "singleton/componentcachemanager.h"
 #include "singleton/fileutils.h"
+#include "singleton/integer64.h"
 
 #ifdef Q_OS_WIN
 
@@ -41,6 +42,8 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     AppInfo::registerQml();
     SoftwareLauncher::registerQml();
     FileUtils::registerQml();
+    Integer64::registerQml();
+
 //    parent->setTitle(AppInfo::instance()->getVersionName());
 //    QDBG_YELLOW() << QGuiApplication::arguments();
     load(QUrl("qrc:/qml/main.qml"));
