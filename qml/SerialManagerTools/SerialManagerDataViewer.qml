@@ -4,8 +4,12 @@ import Qt.labs.platform
 import  "../Style"
 import SerialManager
 import ComponentCacheManager
+import "../TripleSelector"
 
 import QtCore
+import QtQuick.Controls
+import QtQuick.Layouts
+
 Item {
     id: appRectangle
     width: 400
@@ -137,7 +141,7 @@ Item {
 
     Item {
         id: dataViewController
-        height: 40
+        height: 70
 
         anchors.left: parent.left
         anchors.right: parent.right
@@ -150,38 +154,41 @@ Item {
             property alias ctrlTime_state: ctrlTime.checked
             property alias ctrlScroll_state: ctrlScroll.checked
             property alias ctrlEcho_state: ctrlEcho.checked
-            property alias ctrlHex_state: ctrlHex.checked
+//            property alias ctrlHex_state: ctrlHex.checked
         }
-        Row{
+        RowLayout{
             id: switchRow
             property alias ctrlClear: ctrlClear
             property alias ctrlSave: ctrlSave
             property alias ctrlTime: ctrlTime
             property alias ctrlScroll: ctrlScroll
             property alias ctrlEcho: ctrlEcho
-            property alias ctrlHex: ctrlHex
+//            property alias ctrlHex: ctrlHex
             anchors.fill: parent
             z: 1
             anchors.topMargin: 1
             anchors.bottomMargin: 1
             layoutDirection: Qt.RightToLeft
-
-            Button{
-                id:ctrlClear
-                text: "clear"
-                onClicked: serialData.clear()
+            Rectangle{
+                id:ctrlClearRect
                 height: parent.height
-            }
-            Button{
-                id:ctrlSave
-                text: "Save Log"
-                onClicked: {
-                    var log = logToText()
-//                    console.log()
-                    ComponentCacheManager.copyToClipboard(log);
-//                    saveDialog.open()
+                Button{
+                    id:ctrlClear
+                    text: "clear"
+                    onClicked: serialData.clear()
+                    height: parent.height
                 }
-                height: parent.height
+                Button{
+                    id:ctrlSave
+                    text: "Save Log"
+                    onClicked: {
+                        var log = logToText()
+    //                    console.log()
+                        ComponentCacheManager.copyToClipboard(log);
+    //                    saveDialog.open()
+                    }
+                    height: parent.height
+                }
             }
             CheckBox{
                 id: ctrlTime
@@ -204,11 +211,9 @@ Item {
                 checked: true
                 height: parent.height
             }
-            CheckBox{
-                id: ctrlHex
-                text: "Hex Mode"
-                checkable: true
-                checked: false
+            CustomTripleSelector{
+                id: tripleSelector
+                visible: true
                 height: parent.height
             }
         }

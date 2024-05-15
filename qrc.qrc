@@ -40,5 +40,9 @@
         <file>qml/ShortcutHelp.qml</file>
         <file>qml/AppShortcut.qml</file>
         <file>qml/ExportView.qml</file>
+        <file>qml/MyCheckbox.qml</file>
+        <file>qml/TripleSelector/Checker.qml</file>
+        <file>qml/TripleSelector/CustomTripleSelector.qml</file>
+        <file>qml/TripleSelector/CustomCheckBox.qml</file>
     </qresource>
 </RCC>
