@@ -1,7 +1,7 @@
 QT += quick serialport qml core
 QT += quickcontrols2
 
-VERSION = 2.2.2.2 #major.minor.patch.build
+VERSION = 2.3.0.0 #major.minor.patch.build
 DEFINES += APP_VERSION_NAME=\\\"$$VERSION\\\"
 DEFINES += APP_VERSION_CODE=\\\"$$VERSION\\\"
 
@@ -21,6 +21,10 @@ windows: {
         delPlugin.commands =  -$$QMAKE_DEL_TREE plugin
         QMAKE_EXTRA_TARGETS += delPlugin
         PRE_TARGETDEPS += delPlugin
+        appinfo.depends = FORCE
+        appinfo.commands = -$(DEL_FILE) debug\\appinfo.o $$escape_expand(\n\t)-$(DEL_FILE) debug\\appinfo.obj
+        QMAKE_EXTRA_TARGETS += appinfo
+        PRE_TARGETDEPS += appinfo
     }
 
 }

@@ -154,8 +154,9 @@ Item {
             property alias ctrlTime_state: ctrlTime.checked
             property alias ctrlScroll_state: ctrlScroll.checked
             property alias ctrlEcho_state: ctrlEcho.checked
-//            property alias ctrlHex_state: ctrlHex.checked
+            property alias ctrlDisplay_state: tripleSelector.checkedIndex
         }
+
         RowLayout{
             id: switchRow
             property alias ctrlClear: ctrlClear
@@ -163,20 +164,72 @@ Item {
             property alias ctrlTime: ctrlTime
             property alias ctrlScroll: ctrlScroll
             property alias ctrlEcho: ctrlEcho
-//            property alias ctrlHex: ctrlHex
+            property alias tripleSelector: tripleSelector
             anchors.fill: parent
             z: 1
             anchors.topMargin: 1
             anchors.bottomMargin: 1
-            layoutDirection: Qt.RightToLeft
-            Rectangle{
-                id:ctrlClearRect
+            anchors.rightMargin: 1
+            spacing: 5
+
+
+            CheckBox{
+                id: ctrlEcho
+                text: "Echo Mode"
+                checkable: true
+                checked: true
                 height: parent.height
+            }
+
+            CustomTripleSelector{
+                id: tripleSelector
+                visible: true
+                height: parent.height
+            }
+            ColumnLayout{
+                id: show_echo_box
+                Layout.fillHeight: true
+                Layout.preferredWidth: Math.max(ctrlTime.implicitContentWidth, ctrlScroll.implicitContentWidth)
+                Layout.minimumWidth: Math.max(ctrlTime.implicitContentWidth, ctrlScroll.implicitContentWidth)
+                CheckBox{
+                    id: ctrlTime
+                    text: "Show Time"
+                    checkable: true
+                    checked: true
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
+                CheckBox{
+                    id: ctrlScroll
+                    text: "Auto Scroll"
+                    checkable: true
+                    checked: true
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
+            }
+            ColumnLayout{
+                id:ctrlClearRect
+                Layout.minimumWidth: 80
+                Layout.maximumWidth: 100
+                Layout.fillHeight: true
+                Component.onCompleted: {
+                    console.log("ctrlClearRect width : ", ctrlClearRect.width)
+                    console.log("ctrlClearRect height: ", ctrlClearRect.height)
+                    console.log("parent Height :", parent.height)
+                }
+                clip:true
                 Button{
                     id:ctrlClear
                     text: "clear"
                     onClicked: serialData.clear()
                     height: parent.height
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    Component.onCompleted: {
+                        console.log("ctrlClear width : ", ctrlClear.width)
+                    }
+
                 }
                 Button{
                     id:ctrlSave
@@ -187,34 +240,9 @@ Item {
                         ComponentCacheManager.copyToClipboard(log);
     //                    saveDialog.open()
                     }
-                    height: parent.height
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                 }
-            }
-            CheckBox{
-                id: ctrlTime
-                text: "Show Time"
-                checkable: true
-                checked: true
-                height: parent.height
-            }
-            CheckBox{
-                id: ctrlScroll
-                text: "Auto Scroll"
-                checkable: true
-                checked: true
-                height: parent.height
-            }
-            CheckBox{
-                id: ctrlEcho
-                text: "Echo Mode"
-                checkable: true
-                checked: true
-                height: parent.height
-            }
-            CustomTripleSelector{
-                id: tripleSelector
-                visible: true
-                height: parent.height
             }
         }
 
@@ -241,7 +269,7 @@ Item {
             showTime: ctrlTime.checked
             strData: serData
             isSendedData: isSend
-            hexEnable: ctrlHex.checked
+            displayMode: tripleSelector.checkedIndex
             dateString: timestamp
             width:(parent)? parent.width - scrollbar.width: 0
 

@@ -10,19 +10,16 @@ Item {
     property int checkedIndex: 0
     onCheckedIndexChanged: {
         if (checkedIndex == 0) {
-            console.log(checkBoxNameModel[0] + " checked")
             checkBoxs[0].checked = true
             checkBoxs[1].checked = false
             checkBoxs[2].checked = false
         }
         else if (checkedIndex == 1) {
-            console.log(checkBoxNameModel[1] + " checked")
             checkBoxs[0].checked = false
             checkBoxs[1].checked = true
             checkBoxs[2].checked = false
         }
         else if (checkedIndex == 2) {
-            console.log(checkBoxNameModel[2] + " checked")
             checkBoxs[0].checked = false
             checkBoxs[1].checked = false
             checkBoxs[2].checked = true
@@ -45,7 +42,6 @@ Item {
             Layout.fillHeight: true
             checked: checkedIndex === 0
             onReleased: {
-                console.log("released HighLevel, checked: " + checked)
                 if (!checked) {
                     checkedIndex = 0
                 }
@@ -68,8 +64,6 @@ Item {
             Layout.fillHeight: true
             checked: checkedIndex === 1
             onReleased: {
-                console.log("released HighLevel, checked: " + checked)
-
                 if (!checked) {
                     checkedIndex = 1
                 }
