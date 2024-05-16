@@ -3,7 +3,9 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Item {
+    id: selector
     property var checkBoxNameModel: ["ASCII", "Hex", "Mixte"]
+    clip: true
 
     property int checkedIndex: 0
     onCheckedIndexChanged: {
@@ -28,7 +30,11 @@ Item {
     }
 
     property var checkBoxs: [cb1, cb2, cb3]
+    Component.onCompleted: {
+        implicitWidth = Math.max(cb1.implicitWidth, cb2.implicitWidth, cb3.implicitWidth)
+    }
 
+//    implicitWidth: Math.max(cb3.implicitWidth, cb2.implicitWidth, cb1.implicitWidth)
     ColumnLayout {
         anchors.fill: parent
         spacing: 1
@@ -47,12 +53,10 @@ Item {
                     checkedIndex = 0
                 }
             }
-            Rectangle{
-                color: "transparent"
-                border.color: "black"
-                border.width: 1
-                anchors.fill: parent
+            onImplicitWidthChanged: {
+                selector.implicitWidth = Math.max(cb1.implicitWidth, cb2.implicitWidth, cb3.implicitWidth)
             }
+
 
 //            palette: SystemPalette
         }
@@ -73,6 +77,10 @@ Item {
                     checkedIndex = 0
                 }
             }
+            onImplicitWidthChanged: {
+                selector.implicitWidth = Math.max(cb1.implicitWidth, cb2.implicitWidth, cb3.implicitWidth)
+            }
+
         }
         CustomCheckBox {
             id: cb3
@@ -88,11 +96,10 @@ Item {
                     checkedIndex = 0
                 }
             }
+            onImplicitWidthChanged: {
+                selector.implicitWidth = Math.max(cb1.implicitWidth, cb2.implicitWidth, cb3.implicitWidth)
+            }
+
         }
-    }
-    Rectangle {
-        anchors.fill: parent
-        color: "transparent"
-        border.color: "black"
     }
 }
