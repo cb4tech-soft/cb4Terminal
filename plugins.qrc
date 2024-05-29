@@ -7,5 +7,6 @@
         <file>plugin/Burst/Burst.qml</file>
         <file>plugin/SeqSender/SeqSender.qml</file>
         <file>plugin/Readme.md</file>
+        <file>plugin/Crc/Crc.qml</file>
     </qresource>
 </RCC>

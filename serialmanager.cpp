@@ -89,8 +89,10 @@ bool SerialManager::isLineAvailable()
 void SerialManager::checkData()
 {
     if (port->canReadLine())
+    {
+        timer->start(m_receiveTimeout);
         emit lineAvailable();
-    //emit dataAvailable();
+    }
     else if(port->bytesAvailable()) {
         if(port->bytesAvailable() > BUFFERSIZE) {
             emit dataAvailable();
@@ -165,7 +167,7 @@ QString SerialManager::readAll()
         QString dataString = QString::fromLatin1(port->readAll());
         if(port->bytesAvailable())
         {
-            timer->start(100);
+            timer->start(m_receiveTimeout);
         }
         else
             timer->stop();
@@ -192,7 +194,8 @@ void SerialManager::sendString(QString dataOut)
 {
     if (port && port->isOpen())
     {
-        port->write(dataOut.toLocal8Bit());
+        QByteArray arrayToSend = dataOut.toLatin1();
+        port->write(arrayToSend);
     }
 }
 

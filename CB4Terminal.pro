@@ -46,6 +46,7 @@ CONFIG += c++11
 SOURCES += \
         singleton/componentcachemanager.cpp \
         main.cpp \
+        singleton/crc.cpp \
         singleton/fileutils.cpp \
         singleton/integer64.cpp \
         singleton/pluginInfo.cpp \
@@ -59,6 +60,7 @@ SOURCES += \
 
 HEADERS += \
         singleton/componentcachemanager.h \
+        singleton/crc.h \
         singleton/fileutils.h \
         singleton/integer64.h \
         singleton/pluginInfo.h \
