@@ -12,7 +12,7 @@ Item {
     property SerialManager manager
     width: 600
     height: 80
-    property var hexSeparator: [',', ' ', '-', ';', '\n']
+    property var hexSeparator: [',', ' ', '-', ';', ':', '\n']
     signal sendStringData(var stringData);
     signal sendHexaData(var hexaData);
     property alias textInput: textLine.text

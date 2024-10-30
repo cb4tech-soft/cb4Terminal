@@ -44,5 +44,6 @@
         <file>qml/TripleSelector/Checker.qml</file>
         <file>qml/TripleSelector/CustomTripleSelector.qml</file>
         <file>qml/TripleSelector/CustomCheckBox.qml</file>
+        <file>qml/SerialViewLandscape.qml</file>
     </qresource>
 </RCC>
