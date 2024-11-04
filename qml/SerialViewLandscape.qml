@@ -20,29 +20,36 @@ import ComponentCacheManager
 import AppInfo
 
 SplitView{
-        id:splitView
+        id: root
         anchors.fill: parent
+
+        property SerialManager manager
+        property SerialTool.ComPluggedPopup popup
+
+        property alias serialManagerLineSender: serialManagerLineSender
+        property alias dataViewer: dataViewer
+
         SerialTool.SerialManagerConfig{
             id:serialConfig
             SplitView.preferredWidth: 140
-            manager: serManager
+            manager: root.manager
             comList.onNewComPort: function (portname){
                 var i = 0
                 while (i < portname.length)
                 {
-                    popup.comList.push(portname[i])
+                    root.popup.comList.push(portname[i])
                     i++;
                 }
-                popup.update_text()
+                root.popup.update_text()
                 if (sysTrayPopupEnable)
-                    sysTray.showMessage("New device found",  popup.comList.join(', '))
+                    sysTray.showMessage("New device found",  root.popup.comList.join(', '))
                 if (comPopupEnable)
-                    popup.open()
-                popup.timer.interval = 4000;
-                popup.timer.running = true;
+                    root.popup.open()
+                root.popup.timer.interval = 4000;
+                root.popup.timer.running = true;
 
             }
-            comList.scanPort: (root.scanPortEnable)? !serManager.isConnected : false
+            comList.scanPort: (root.scanPortEnable)? !root.manager.isConnected : false
         }
         SplitView{
             id:splitViewSerial
@@ -50,7 +57,7 @@ SplitView{
             SerialTool.SerialManagerDataViewer{
                 id:dataViewer
                 SplitView.fillHeight: true
-                manager : serManager
+                manager : root.manager
             }
 
             SerialTool.SerialManagerLineSender {
@@ -58,7 +65,7 @@ SplitView{
                 y: 0
 
                 SplitView.preferredHeight: 80
-                manager : serManager
+                manager : root.manager
                 onSendStringData: function(stringData){
                     dataViewer.sendString(stringData);
                     if (root.clearOnSend)

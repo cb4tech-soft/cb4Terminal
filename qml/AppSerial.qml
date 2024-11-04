@@ -26,9 +26,11 @@ ApplicationWindow {
     property bool sysTrayPopupEnable: true
     property bool comPopupEnable : true
     property alias serManager: serManager
-    property alias dataViewer: dataViewer
+    //property alias dataViewer: splitViewLoader.item.dataViewer
+    property SerialTool.SerialManagerDataViewer dataViewer
     property alias exportView: exportView
-    property alias serialManagerLineSender: serialManagerLineSender
+    //property alias serialManagerLineSender: splitView.serialManagerLineSender
+    property SerialTool.SerialManagerLineSender serialManagerLineSender
 
     visible: true
     width:850
@@ -134,10 +136,23 @@ ApplicationWindow {
         baudrate: SerialManager.Baud19200
     }
 
-    SerialViewLandscape {
-        id: splitView
-    }
+    Loader {
+        id: splitViewLoader
+        anchors.fill: parent
+        source: (parent.width > 800) ? "qrc:/qml/SerialViewLandscape.qml" : "qrc:/qml/SerialViewPortrait.qml"
 
+        Binding{
+            target: splitViewLoader.item
+            when: splitViewLoader.status == Loader.Ready
+            property: "manager"
+            value: serManager
+        }
+        onLoaded: {
+            console.log("LOADED")
+            root.dataViewer = dataViewer
+            root.serialManagerLineSender = serialManagerLineSender
+        }
+    }
 
     Platform.SystemTrayIcon {
         id:sysTray

@@ -33,27 +33,27 @@ Item {
     }
 
     onBaudrateChanged: {
-        if (serialConfig.manager.isConnected)
+        if (serialConfig.manager !== null && serialConfig.manager.isConnected)
             serialConfig.manager.baudrate = serialConfig.baudrate
     }
 
     onDataBitsChanged: {
-        if(serialConfig.manager.isConnected)
+        if(serialConfig.manager !== null && serialConfig.manager.isConnected)
             serialConfig.manager.dataBits = serialConfig.dataBits
     }
 
     onFlowControlChanged:{
-        if(serialConfig.manager.isConnected)
+        if(serialConfig.manager !== null && serialConfig.manager.isConnected)
             serialConfig.manager.flowControl = serialConfig.flowControl
     }
 
     onParityChanged:{
-        if(serialConfig.manager.isConnected)
+        if(serialConfig.manager !== null && serialConfig.manager.isConnected)
             serialConfig.manager.parity = serialConfig.partity
     }
 
     onStopBitsChanged: {
-        if(serialConfig.manager.isConnected)
+        if(serialConfig.manager !== null && serialConfig.manager.isConnected)
             serialConfig.manager.dataBits = serialConfig.dataBits
     }
 
