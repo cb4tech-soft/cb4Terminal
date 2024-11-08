@@ -20,6 +20,8 @@
 #include "singleton/integer64.h"
 #include "singleton/crc.h"
 
+#include "commandhistorymanager.h"
+
 #ifdef Q_OS_WIN
 
 
@@ -44,6 +46,7 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     FileUtils::registerQml();
     Integer64::registerQml();
     CRC::registerQml();
+    CommandHistoryManager::registerQml();
 
 
 //    parent->setTitle(AppInfo::instance()->getVersionName());

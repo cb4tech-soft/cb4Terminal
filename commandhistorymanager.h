@@ -29,6 +29,11 @@ public:
 public slots:
     Q_INVOKABLE void appendCommand(QString command, bool syntaxMode);
 
+    Q_INVOKABLE QVariantList getPreviousCommand();
+    Q_INVOKABLE QVariantList getNextCommand();
+
+    Q_INVOKABLE void setCurrentPosition(int newCurrentPosition);
+
 signals:
 
 private slots:

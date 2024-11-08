@@ -41,7 +41,9 @@ PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
 // extract qml plugins from plugins.qrc to plugin folder
 void PluginInfo::extractQrcPlugin()
 {
+#ifndef Q_OS_ANDROID
     QNtfsPermissionCheckGuard permissionGuard;
+#endif
     QDir d(pluginFolder);
     QFile versionFile(pluginFolder + BUILD_VERSION_FILE);
     bool newVersion = false;

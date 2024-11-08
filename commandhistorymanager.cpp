@@ -9,6 +9,11 @@ CommandHistoryManager::CommandHistoryManager(QObject *parent)
     : QObject(parent)
 {}
 
+void CommandHistoryManager::setCurrentPosition(int newCurrentPosition)
+{
+    currentPosition = newCurrentPosition;
+}
+
 void CommandHistoryManager::registerQml()
 {
     qmlRegisterSingletonType<CommandHistoryManager>("CommandHistoryManager",
@@ -48,4 +53,36 @@ void CommandHistoryManager::appendCommand(QString command, bool syntaxMode)
             commandHistory.removeLast();
         }
     }
+}
+
+QVariantList CommandHistoryManager::getPreviousCommand()
+{
+    if(currentPosition < commandHistory.count() - 1) {
+        currentPosition++;
+    }
+
+    QVariantList commandToReturn;
+    commandToReturn.append(commandHistory[currentPosition].first);
+    commandToReturn.append(commandHistory[currentPosition].second);
+
+    return commandToReturn;
+}
+
+QVariantList CommandHistoryManager::getNextCommand()
+{
+    if(currentPosition > -1) {
+        currentPosition--;
+    }
+
+    QVariantList commandToReturn;
+    if(currentPosition == -1) {
+        commandToReturn.append("");
+        commandToReturn.append(SYNTAX_ASCII);
+        return commandToReturn;
+    }
+
+    commandToReturn.append(commandHistory[currentPosition].first);
+    commandToReturn.append(commandHistory[currentPosition].second);
+
+    return commandToReturn;
 }

@@ -5,7 +5,7 @@ import SerialManager
 import QtQuick.Layouts
 
 import QtCore
-
+import CommandHistoryManager
 
 Item {
     id:root
@@ -46,7 +46,7 @@ Item {
         return filteredArray;
     }
 
-    function triggerSend() {
+    function triggerSend() {    
         if (!textLine.text.length)
             return
         var stringToSend = textLine.text
@@ -97,6 +97,8 @@ Item {
             }
             sendStringData(stringToSend)
         }
+        CommandHistoryManager.appendCommand(stringToSend, switchHex.checked)
+        CommandHistoryManager.setCurrentPosition(0)
     }
 
     focus: true
@@ -189,11 +191,20 @@ Item {
             anchors.topMargin: 4
 
             Keys.onReleased: (event) => {
-                if ((event.key == Qt.Key_Return || event.key == Qt.Key_Enter) && !(event.modifiers & Qt.ShiftModifier)) {
+                if ((event.key === Qt.Key_Return || event.key === Qt.Key_Enter) && !(event.modifiers & Qt.ShiftModifier)) {
                     var pos = cursorPosition
                     text = text.substring(0, pos - 1) + text.substring(pos, text.length)
                     cursorPosition = text.length
                     triggerSend()
+                } else if (event.key === Qt.Key_Up) {
+                    var previousCommand = CommandHistoryManager.getPreviousCommand()
+                    text = previousCommand[CommandHistoryManager.COMMAND_STRING]
+                    switchHex.checked = previousCommand[CommandHistoryManager.COMMAND_SYNTAX_MODE]
+                } else if (event.key === Qt.Key_Down) {
+                    var nextCommand = CommandHistoryManager.getNextCommand()
+                    text = nextCommand[CommandHistoryManager.COMMAND_STRING]
+                    if(text !== "")
+                        switchHex.checked = nextCommand[CommandHistoryManager.COMMAND_SYNTAX_MODE]
                 }
             }
 
