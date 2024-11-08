@@ -8,3 +8,5 @@ plugin/BancTest_citynox/BancTest_citynox.qml
 plugin/BancTest_citynox/Test_Runner.qml
 plugin/BancTest_citynox/Test_Runner.qml
 /plugin/BancTest_citynox
+
+build/
