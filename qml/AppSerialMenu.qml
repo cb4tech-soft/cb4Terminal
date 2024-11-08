@@ -25,6 +25,11 @@ MenuBar {
            onTriggered: ComponentCacheManager.createNewInstance()
 
        }
+       ShortcutMenuItem { id: logCopyMenuItem; text: "Log copy view"; width:implicitBackgroundWidth
+            sequence: "Ctrl+Shift+L";
+           onTriggered: ComponentCacheManager.createLogCopyView(dataViewer.logToText())
+
+       }
        Action { text: "Scan port"; checkable: true; checked:root.scanPortEnable
            onCheckedChanged: function (checked) {
                root.scanPortEnable = checked

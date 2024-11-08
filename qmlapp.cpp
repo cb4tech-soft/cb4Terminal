@@ -48,10 +48,18 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     CRC::registerQml();
     CommandHistoryManager::registerQml();
 
-
 //    parent->setTitle(AppInfo::instance()->getVersionName());
 //    QDBG_YELLOW() << QGuiApplication::arguments();
-    load(QUrl("qrc:/qml/main.qml"));
+
+    QStringList arguments = QGuiApplication::arguments();
+    if(arguments.contains("logCopy")) {
+        load(QUrl("qrc:/qml/LogCopyView.qml"));
+        if(arguments.count() >= 3) {
+            ComponentCacheManager::instance()->loadLogCopyview(arguments[2]);
+        }
+    } else {
+        load(QUrl("qrc:/qml/main.qml"));
+    }
     QDBG_YELLOW() << AppInfo::instance()->getCompilationDateTime() << DBG_CLR_RESET;
 }
 

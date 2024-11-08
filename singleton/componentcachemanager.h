@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QQmlEngine>
 
+#define SPECIAL_MODE_LOG_COPY "logCopy"
+
 class ComponentCacheManager : public QObject
 {
     Q_OBJECT
@@ -15,6 +17,10 @@ public:
 
     Q_INVOKABLE void trim() { instance_engine->clearComponentCache(); }
     Q_INVOKABLE void createNewInstance();
+
+    Q_INVOKABLE void createLogCopyView(QString text);
+    Q_INVOKABLE void loadLogCopyview(QString text);
+
     Q_INVOKABLE void copyToClipboard(QString text);
 
     QQmlEngine *instance_engine = nullptr;
@@ -22,6 +28,7 @@ public:
 public slots:
 
 signals:
+    void logCopyText(QString text);
 
 private slots:
 

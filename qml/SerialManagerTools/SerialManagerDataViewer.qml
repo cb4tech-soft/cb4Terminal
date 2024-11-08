@@ -23,7 +23,7 @@ Item {
     signal dataAppend(string lineData);
 
     function logToText() {
-        var chaine = []
+        var chaine = ""
         console.log("logToText - ")
         for(let i = 0; i < serialData.count; i++) {
             if(ctrlTime.checked) {
@@ -32,10 +32,12 @@ Item {
                 var timestamp = timehtml.replace("<font color=\"grey\">", "");
                 timestamp = timestamp.replace("</font>", "");
                 timestamp+= " : "
-                chaine.push(timestamp)
+                chaine+= timestamp
             }
-            chaine.push(serialData.get(i).serData)
+            chaine+= serialData.get(i).serData
+            chaine+='\n'
         }
+        console.log(chaine)
         return chaine;
     }
 
@@ -45,7 +47,7 @@ Item {
         {
             var dataLine = manager.readLine()
             lineDataAppend(dataLine);
-            if (dataLine[dataLine.length-1] == '\n')
+            if (dataLine[dataLine.length-1] === '\n')
             {
                 dataLine =  dataLine.slice(0, dataLine.length-1)
             }

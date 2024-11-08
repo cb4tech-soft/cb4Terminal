@@ -97,7 +97,7 @@ Item {
             }
             sendStringData(stringToSend)
         }
-        CommandHistoryManager.appendCommand(stringToSend, switchHex.checked)
+        CommandHistoryManager.appendCommand(stringToSend, switchHex.checked, comboCRLF.currentIndex)
         CommandHistoryManager.setCurrentPosition(0)
     }
 
@@ -200,11 +200,14 @@ Item {
                     var previousCommand = CommandHistoryManager.getPreviousCommand()
                     text = previousCommand[CommandHistoryManager.COMMAND_STRING]
                     switchHex.checked = previousCommand[CommandHistoryManager.COMMAND_SYNTAX_MODE]
+                    comboCRLF.currentIndex = previousCommand[CommandHistoryManager.COMMAND_CRLF_MODE]
                 } else if (event.key === Qt.Key_Down) {
                     var nextCommand = CommandHistoryManager.getNextCommand()
                     text = nextCommand[CommandHistoryManager.COMMAND_STRING]
-                    if(text !== "")
+                    if(text !== "") {
                         switchHex.checked = nextCommand[CommandHistoryManager.COMMAND_SYNTAX_MODE]
+                        comboCRLF.currentIndex = nextCommand[CommandHistoryManager.COMMAND_CRLF_MODE]
+                    }
                 }
             }
 

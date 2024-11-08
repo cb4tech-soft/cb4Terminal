@@ -5,7 +5,6 @@
 #ifdef Q_OS_ANDROID
 //#include <QtAndroid>
 #endif
-#include "serialmanager.h"
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 

@@ -16,7 +16,8 @@ public:
 
     enum commandData_e {
         COMMAND_STRING = 0,
-        COMMAND_SYNTAX_MODE = 1
+        COMMAND_SYNTAX_MODE = 1,
+        COMMAND_CRLF_MODE = 2
     };
     Q_ENUM(commandData_e)
 
@@ -26,8 +27,23 @@ public:
     };
     Q_ENUM(syntaxMode_e)
 
+    enum crlfMode_e {
+        CRLF_MODE_NONE = 0,
+        CRLF_MODE_N = 1,
+        CRLF_MODE_R = 2,
+        CRLF_MODE_RN = 3,
+        CRLF_MODE_0 = 4
+    };
+    Q_ENUM(crlfMode_e)
+
+    typedef struct serialCommand_s {
+        QString commandString;
+        syntaxMode_e syntaxMode;
+        crlfMode_e clrfMode;
+    } SerialCommand;
+
 public slots:
-    Q_INVOKABLE void appendCommand(QString command, bool syntaxMode);
+    Q_INVOKABLE void appendCommand(QString command, bool syntaxMode, int crlfMode);
 
     Q_INVOKABLE QVariantList getPreviousCommand();
     Q_INVOKABLE QVariantList getNextCommand();
@@ -42,7 +58,7 @@ private:
     explicit CommandHistoryManager(QObject *parent = nullptr);
     static CommandHistoryManager *m_pThis;
 
-    QList<QPair<QString, bool>> commandHistory;
+    QList<SerialCommand> commandHistory;
     int currentPosition = 0;
 
 };

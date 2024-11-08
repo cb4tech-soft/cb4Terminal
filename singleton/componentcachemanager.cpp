@@ -49,6 +49,21 @@ void ComponentCacheManager::createNewInstance()
     QProcess::startDetached(programPath);
 }
 
+void ComponentCacheManager::createLogCopyView(QString text)
+{
+    QString programPath = QGuiApplication::applicationFilePath();
+    qDebug() << "Starting new instance: " << programPath;
+    QStringList logCopyArgs;
+    logCopyArgs.append(SPECIAL_MODE_LOG_COPY);
+    logCopyArgs.append(text);
+    QProcess::startDetached(programPath, logCopyArgs);
+}
+
+void ComponentCacheManager::loadLogCopyview(QString text)
+{
+    emit logCopyText(text);
+}
+
 void ComponentCacheManager::copyToClipboard(QString text)
 {
     QClipboard *clipboard = QGuiApplication::clipboard();

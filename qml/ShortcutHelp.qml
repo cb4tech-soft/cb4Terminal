@@ -10,6 +10,10 @@ Rectangle {
             description: "New window"
         }
         ListElement{
+            shortcut: "Ctrl + Shift + L"
+            description: "Log copy view"
+        }
+        ListElement{
             shortcut: "Ctrl + Q"
             description: "Quit"
         }
@@ -84,6 +88,20 @@ Rectangle {
         text: "Close"
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {
+            root.visible = false
+        }
+    }
+
+    Button{
+        text: "X"
+
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+
+        width: height
+
         onClicked: {
             root.visible = false
         }

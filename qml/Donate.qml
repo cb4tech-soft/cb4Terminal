@@ -4,6 +4,21 @@ import QtQuick.Layouts
 Rectangle {
     id:root
     property int catIndex: Math.ceil(Math.random() * 19)
+
+    Button{
+        text: "X"
+
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+
+        width: height
+
+        onClicked: {
+            root.visible = false
+        }
+    }
+
     ColumnLayout{
         anchors.fill: parent
         Label{

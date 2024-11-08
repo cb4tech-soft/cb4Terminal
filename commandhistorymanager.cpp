@@ -40,11 +40,12 @@ QObject *CommandHistoryManager::qmlInstance(QQmlEngine *engine, QJSEngine *scrip
     return CommandHistoryManager::instance();
 }
 
-void CommandHistoryManager::appendCommand(QString command, bool syntaxMode)
+void CommandHistoryManager::appendCommand(QString command, bool syntaxMode, int crlfMode)
 {
-    QPair<QString, bool> commandToAdd;
-    commandToAdd.first = command;
-    commandToAdd.second = syntaxMode;
+    SerialCommand commandToAdd;
+    commandToAdd.commandString = command;
+    commandToAdd.syntaxMode = (syntaxMode_e)syntaxMode;
+    commandToAdd.clrfMode = (crlfMode_e)crlfMode;
 
     commandHistory.prepend(commandToAdd);
 
@@ -62,8 +63,9 @@ QVariantList CommandHistoryManager::getPreviousCommand()
     }
 
     QVariantList commandToReturn;
-    commandToReturn.append(commandHistory[currentPosition].first);
-    commandToReturn.append(commandHistory[currentPosition].second);
+    commandToReturn.append(commandHistory[currentPosition].commandString);
+    commandToReturn.append(commandHistory[currentPosition].syntaxMode);
+    commandToReturn.append(commandHistory[currentPosition].clrfMode);
 
     return commandToReturn;
 }
@@ -78,11 +80,13 @@ QVariantList CommandHistoryManager::getNextCommand()
     if(currentPosition == -1) {
         commandToReturn.append("");
         commandToReturn.append(SYNTAX_ASCII);
+        commandToReturn.append(CRLF_MODE_NONE);
         return commandToReturn;
     }
 
-    commandToReturn.append(commandHistory[currentPosition].first);
-    commandToReturn.append(commandHistory[currentPosition].second);
+    commandToReturn.append(commandHistory[currentPosition].commandString);
+    commandToReturn.append(commandHistory[currentPosition].syntaxMode);
+    commandToReturn.append(commandHistory[currentPosition].clrfMode);
 
     return commandToReturn;
 }
