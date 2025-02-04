@@ -1,14 +1,18 @@
+import QtCore
+
 import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import QtQuick.Controls.Material.impl
 import QtQuick.Controls.Material
+
 import Qt.labs.platform
-import  "../Style"
+
 import SerialManager
 import ComponentCacheManager
-import "../TripleSelector"
 
-import QtCore
-import QtQuick.Controls
-import QtQuick.Layouts
+import  "../Style"
+import "../TripleSelector"
 
 Item {
     id: appRectangle
@@ -21,7 +25,7 @@ Item {
     property SerialManager manager
     signal lineDataAppend(string lineData);
     signal dataAppend(string lineData);
-
+/*
     function logToText() {
         var chaine = ""
         console.log("logToText - ")
@@ -39,6 +43,34 @@ Item {
         }
         console.log(chaine)
         return chaine;
+    }
+*/
+    function logToText() {
+        var plainTextChaine = []
+        var richTextChaine = []
+        console.log("logToText - ")
+        for(let i = 0; i < serialData.count; i++) {
+            var temp_plainTextChaine = ""
+            var temp_richTextChaine = ""
+            if(ctrlTime.checked) {
+                //This needs to be improved...
+                temp_richTextChaine = serialData.get(i).timestamp + " : "
+                var timestamp = temp_richTextChaine.replace("<font color=\"grey\">", "");
+
+                temp_plainTextChaine = timestamp.replace("</font>", "");
+            }
+            if (serialData.get(i).isSend)
+                temp_richTextChaine += "<font color=\"blue\">";
+
+            temp_plainTextChaine += serialData.get(i).serData
+            temp_richTextChaine += serialData.get(i).serData
+            if (serialData.get(i).isSend)
+                temp_richTextChaine += "</font>";
+            plainTextChaine.push(temp_plainTextChaine)
+            richTextChaine.push(temp_richTextChaine)
+        }
+//        ComponentCacheManager.saveLogFile(richTextChaine.join("</br>"), plainTextChaine.join("\n"))
+        return plainTextChaine.join("\n");
     }
 
     function lineUpdate()
@@ -73,6 +105,7 @@ Item {
 
     ListModel {
         id: serialData
+        // serialData.append({"timestamp": dateString ,"serData": r, "isSend": true})
     }
 
     function appendOut(outData)
@@ -191,6 +224,7 @@ Item {
             ColumnLayout{
                 id: show_echo_box
                 Layout.fillHeight: true
+                Layout.fillWidth: true
                 Layout.preferredWidth: Math.max(ctrlTime.implicitContentWidth, ctrlScroll.implicitContentWidth)
                 Layout.minimumWidth: Math.max(ctrlTime.implicitContentWidth, ctrlScroll.implicitContentWidth)
                 CheckBox{
@@ -212,8 +246,10 @@ Item {
             }
             ColumnLayout{
                 id:ctrlClearRect
-                Layout.minimumWidth: 80
-                Layout.maximumWidth: 100
+                anchors.rightMargin: 1
+                Layout.minimumWidth: Screen.pixelDensity * 13
+                Layout.maximumWidth: Screen.pixelDensity * 28
+                Layout.fillWidth: true
                 Layout.fillHeight: true
                 Component.onCompleted: {
                     console.log("ctrlClearRect width : ", ctrlClearRect.width)
@@ -224,21 +260,33 @@ Item {
                 Button{
                     id:ctrlClear
                     text: "clear"
-                    onClicked: serialData.clear()
-                    height: parent.height
+
+                    spacing: 0
+                    padding: 0
+                    leftInset: 1
+                    rightInset: 1
+                    leftPadding: 1
+                    rightPadding: 1
+
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    Component.onCompleted: {
-                        console.log("ctrlClear width : ", ctrlClear.width)
-                    }
 
+                    onClicked: serialData.clear()
                 }
                 Button{
                     id:ctrlSave
+
                     text: "Save Log"
+
+                    spacing: 0
+                    padding: 0
+                    leftInset: 1
+                    rightInset: 1
+                    leftPadding: 1
+                    rightPadding: 1
+
                     onClicked: {
                         var log = logToText()
-    //                    console.log()
                         ComponentCacheManager.copyToClipboard(log);
     //                    saveDialog.open()
                     }

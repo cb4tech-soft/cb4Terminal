@@ -43,7 +43,22 @@ QObject *CommandHistoryManager::qmlInstance(QQmlEngine *engine, QJSEngine *scrip
 void CommandHistoryManager::appendCommand(QString command, bool syntaxMode, int crlfMode)
 {
     SerialCommand commandToAdd;
-    commandToAdd.commandString = command;
+    if (syntaxMode == SYNTAX_HEXA)
+    {
+        QString convData;
+        QStringList hexData = command.split(',');
+        int i = 0;
+        while (i < hexData.length())
+        {
+            convData.append(QString::number(hexData[i].toInt(nullptr, 10), 16));
+            convData.append(' ');
+            i++;
+        }
+        commandToAdd.commandString = convData;
+    }
+    else
+        commandToAdd.commandString = command;
+
     commandToAdd.syntaxMode = (syntaxMode_e)syntaxMode;
     commandToAdd.clrfMode = (crlfMode_e)crlfMode;
 
@@ -60,6 +75,14 @@ QVariantList CommandHistoryManager::getPreviousCommand()
 {
     if(currentPosition < commandHistory.count() - 1) {
         currentPosition++;
+    }
+    if (currentPosition == -1)
+    {
+        QVariantList commandToReturn;
+        commandToReturn.append("");
+        commandToReturn.append(SYNTAX_ASCII);
+        commandToReturn.append(CRLF_MODE_NONE);
+        return commandToReturn;
     }
 
     QVariantList commandToReturn;

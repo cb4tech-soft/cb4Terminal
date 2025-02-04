@@ -59,7 +59,7 @@ private:
     static CommandHistoryManager *m_pThis;
 
     QList<SerialCommand> commandHistory;
-    int currentPosition = 0;
+    int currentPosition = -1;
 
 };
 

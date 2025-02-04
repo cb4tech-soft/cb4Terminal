@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Controls.Material
 import QtQuick.Layouts
 
 
@@ -25,6 +26,7 @@ Item {
             font.pixelSize: 14
             Layout.fillWidth: true
             Layout.fillHeight: true
+            color: root.enabled ? root.Material.foreground : root.Material.hintTextColor
         }
      }
     MouseArea {

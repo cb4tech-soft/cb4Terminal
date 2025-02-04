@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import  "../Style"
 import SerialManager
 import QtQuick.Layouts
 
@@ -97,6 +96,7 @@ Item {
             }
             sendStringData(stringToSend)
         }
+        console.log("Sending: ", stringToSend)
         CommandHistoryManager.appendCommand(stringToSend, switchHex.checked, comboCRLF.currentIndex)
         CommandHistoryManager.setCurrentPosition(0)
     }
@@ -106,14 +106,22 @@ Item {
 
     ColumnLayout{
         id:sendLayout
+
+        anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        spacing: 1
+
         anchors.bottomMargin: 4
-        anchors.rightMargin: 8
-        anchors.right: parent.right
+        anchors.rightMargin: 1
+
+        Layout.minimumWidth: 100
+        Layout.maximumWidth: 250
+
+        spacing: 1
 
         width: (advancedMode)?(repeatTime.implicitWidth): Screen.pixelDensity*25
+//        width: (advancedMode) ? parent.width/6 : parent.width/7
+
         property bool advancedMode: false
 
         SpinBox{
@@ -142,8 +150,15 @@ Item {
                                             : "Send"
             Layout.bottomMargin: 3
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+            Layout.alignment: Qt.AlignRight | Qt.AlignTop
             Layout.preferredHeight: (root.height > 60) ? 40 : root.height - 20
+
+            spacing: 0
+            padding: 0
+            leftInset: 1
+            rightInset: 1
+            leftPadding: 1
+            rightPadding: 1
             onClicked: {
                 if (sendLayout.advancedMode) {
                     if (timerRepeat.running) {
@@ -235,9 +250,8 @@ Item {
         ComboBox {
             id: comboCRLF
             model: ["No CRLF", "\\n", "\\r", "\\r\\n", "\\0"]
-            height: 37
             Layout.fillHeight: true
-            anchors.rightMargin: 5
+            Layout.alignment: Qt.AlignRight
         }
     }
 }

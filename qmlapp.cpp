@@ -48,9 +48,6 @@ QmlApp::QmlApp(QWindow *parent) : QQmlApplicationEngine(parent)
     CRC::registerQml();
     CommandHistoryManager::registerQml();
 
-//    parent->setTitle(AppInfo::instance()->getVersionName());
-//    QDBG_YELLOW() << QGuiApplication::arguments();
-
     QStringList arguments = QGuiApplication::arguments();
     if(arguments.contains("logCopy")) {
         load(QUrl("qrc:/qml/LogCopyView.qml"));

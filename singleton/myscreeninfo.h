@@ -18,7 +18,6 @@ public slots:
     Q_INVOKABLE QRect getScreenInfo(int posX, int posY);
 
 signals:
-    void nameChanged();
 
 private slots:
 
