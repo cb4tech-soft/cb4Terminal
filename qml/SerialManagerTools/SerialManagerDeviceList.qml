@@ -1,16 +1,21 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Controls.impl
 import QtQuick.Controls.Material
 import QtQuick.Controls.Material.impl
 
+
 import QtQuick.Templates as T
+
 import SerialInfo
 import SerialManager
+
+import "../generic/material"
 
 ComboBox{
     id: control
     model: internal.portList
+    property SerialManager manager
+
 
     QtObject{
         id:internal
@@ -47,6 +52,43 @@ ComboBox{
         }
     }
 
+    delegate: MenuItem {
+        required property var model
+        required property int index
+
+        width: ListView.view.width
+        text: model[control.textRole]
+        Material.foreground: control.currentIndex === index ? ListView.view.contentItem.Material.accent : ListView.view.contentItem.Material.foreground
+        highlighted: control.highlightedIndex === index
+        hoverEnabled: control.hoverEnabled
+
+        // onClicked: {
+        //     ToolTip.show(manager.getComInfo(model[control.textRole]), 5000)
+        // }
+
+
+        MaterialDesignIcon {
+            id: infoButton
+            name: "information"
+            color: (ma.containsMouse) ? Qt.darker("dodgerblue", 1.15) :  "dodgerblue"
+            scale: (ma.containsMouse) ? 0.75 : 0.7
+            width: parent.height
+            height: parent.height
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            visible: control.highlightedIndex === index
+            MouseArea {
+                id: ma
+                anchors.fill: parent
+                hoverEnabled: true
+                ToolTip.delay: 250
+                ToolTip.timeout: 5000
+                ToolTip.visible: ma.containsMouse
+                ToolTip.text: control.manager.getComInfo(model[control.textRole])
+            }
+            Behavior on scale { NumberAnimation { duration: 200 ; easing.type: Easing.InOutQuart; } }
+        }
+    }
 
     popup: T.Popup {
         y: control.editable ? control.height - 5 : 0
@@ -73,19 +115,19 @@ ComboBox{
             NumberAnimation { property: "opacity"; to: 0.0; easing.type: Easing.OutCubic; duration: 150 }
         }
 
-        contentItem: ListView {
-            clip: true
+        contentItem: ListView{
+            leftMargin: 5
             implicitHeight: contentHeight
-            model: control.delegateModel
+            keyNavigationEnabled: true
+            model:control.popup.visible ? control.delegateModel : null
+            clip: true
+            focus: true
             currentIndex: control.highlightedIndex
-            highlightMoveDuration: 0
-
-            T.ScrollIndicator.vertical: ScrollIndicator { }
         }
-
         background: Rectangle {
             radius: 4
             color: parent.Material.dialogColor
+            //            color: "blue"
 
             layer.enabled: control.enabled
             layer.effect: RoundedElevationEffect {

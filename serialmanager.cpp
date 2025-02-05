@@ -247,6 +247,11 @@ void SerialManager::saveToFile(QStringList dataList, QString filepath, bool time
     }
 }
 
+QString SerialManager::getComInfo(QString com)
+{
+    return getStaticInfoInstance()->getInfo(com);
+}
+
 SerialInfo *SerialManager::getStaticInfoInstance()
 {
     return &serialInfo;
@@ -410,11 +415,9 @@ QString SerialInfo::getInfo(QString com)
 {
     QSerialPortInfo info(com);
     QString result;
-    result = "name : " + com + "\n";
+    result = "        name : " + com + "\n";
     result += "description : " + info.description() + "\n";
-    result += "vendor : " + QString::number(info.vendorIdentifier()) + " product : " + QString::number(info.productIdentifier());
-    //= info.description();
-    result += "\n";
+    result += QStringLiteral("ID : %1:%2").arg(info.vendorIdentifier(), 4, 16, QLatin1Char('0')).arg(info.productIdentifier(), 4, 16, QLatin1Char('0'));
     return result;
 }
 

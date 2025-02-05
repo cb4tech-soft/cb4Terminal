@@ -45,5 +45,9 @@
         <file>qml/TripleSelector/CustomTripleSelector.qml</file>
         <file>qml/TripleSelector/CustomCheckBox.qml</file>
         <file>qml/LogCopyView.qml</file>
+        <file>qml/generic/material/MaterialDesignIcon.qml</file>
+        <file>qml/generic/material/MaterialDesignIconGlyphs.js</file>
+        <file>qml/generic/material/materialdesignicons-webfont.svg</file>
+        <file>qml/generic/material/materialdesignicons-webfont.ttf</file>
     </qresource>
 </RCC>

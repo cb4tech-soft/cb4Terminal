@@ -139,6 +139,7 @@ ApplicationWindow {
         SerialTool.SerialManagerConfig{
             id:serialConfig
             SplitView.preferredWidth: 140
+            SplitView.maximumWidth: root.width/2
             manager: serManager
             comList.onNewComPort: function (portname){
                 var i = 0

@@ -76,6 +76,7 @@ Item {
     }
     SerialManagerDeviceList{
         id:comList
+        manager: serialConfig.manager
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: label.bottom

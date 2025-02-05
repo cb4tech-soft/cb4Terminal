@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 import SerialManager
 import QtQuick.Layouts
 
@@ -35,9 +35,9 @@ Item {
                         part = part.replace(new RegExp(sep, 'g'), '');
                     } // Check if part is a valid hexadecimal string
                     if (/^[0-9A-Fa-f]+$/.test(part)) {
-                    return parseInt(part, 16);
+                        return parseInt(part, 16);
                     } else {
-                    return NaN;
+                        return NaN;
                     }
                 });
         const filteredArray = bytes.filter((value) => !isNaN(value));
@@ -169,7 +169,7 @@ Item {
                     }
                 }
                 else {
-                    triggerSend()
+                    root.triggerSend()
                 }
             }
             onPressAndHold: {
@@ -181,7 +181,7 @@ Item {
                 interval: repeatTime.value
                 running: false
                 onTriggered: {
-                    triggerSend()
+                    root.triggerSend()
                 }
             }
 
@@ -210,7 +210,7 @@ Item {
                     var pos = cursorPosition
                     text = text.substring(0, pos - 1) + text.substring(pos, text.length)
                     cursorPosition = text.length
-                    triggerSend()
+                    root.triggerSend()
                 } else if (event.key === Qt.Key_Up) {
                     var previousCommand = CommandHistoryManager.getPreviousCommand()
                     text = previousCommand[CommandHistoryManager.COMMAND_STRING]
@@ -239,19 +239,20 @@ Item {
         anchors.top: parent.top
         anchors.topMargin: 2
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: 2
         anchors.rightMargin: 5
-        spacing: 1
+        spacing: 2
         Switch {
             id: switchHex
-            text: "Hex  "
-            Layout.fillHeight: true
+            text: "Hex"
         }
 
         ComboBox {
             id: comboCRLF
             model: ["No CRLF", "\\n", "\\r", "\\r\\n", "\\0"]
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignRight
+            Layout.maximumHeight: Screen.pixelDensity * 15
+            Layout.alignment: Qt.AlignRight | Qt.AlignTop
         }
     }
 }

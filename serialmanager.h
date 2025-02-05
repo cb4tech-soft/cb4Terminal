@@ -60,6 +60,9 @@ public:
     Q_INVOKABLE void sendString(QString dataOut);
     Q_INVOKABLE void saveToFile(QStringList dataList, QString filepath, bool timestampsEnabled);
 
+    Q_INVOKABLE QString getComInfo(QString com);
+
+
 
     static SerialInfo *getStaticInfoInstance();
 

@@ -1,8 +1,10 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.impl
+import QtQuick.Controls.Material
+import QtQuick.Controls.Material.impl
 
+import QtQuick.Templates as T
 
-import QtQuick.Layouts
 import SerialManager
 import QtQuick.Window
 import Qt.labs.platform as Platform
@@ -92,7 +94,41 @@ MenuBar {
             model: PluginInfo.pluginFiles
 
             MenuItem {
+                id: pluginMenuItem
                 text: FileStringTools.getFileNameFromPath(modelData)
+
+                contentItem: IconLabel {
+                    id: iconLab
+                    readonly property real arrowPadding: pluginMenuItem.subMenu && pluginMenuItem.arrow ? pluginMenuItem.arrow.width + pluginMenuItem.spacing : 0
+                    readonly property real indicatorPadding: pluginMenuItem.checkable && pluginMenuItem.indicator ? pluginMenuItem.indicator.width + pluginMenuItem.spacing : 0
+                    leftPadding: !pluginMenuItem.mirrored ? indicatorPadding : arrowPadding
+                    rightPadding: pluginMenuItem.mirrored ? indicatorPadding : arrowPadding
+
+                    spacing: pluginMenuItem.spacing
+                    mirrored: pluginMenuItem.mirrored
+                    display: pluginMenuItem.display
+                    alignment: Qt.AlignLeft
+
+                    TextMetrics {
+                        id: textMetrics
+
+                        font: pluginMenuItem.font
+                        elide: Text.ElideNone
+//                        elideWidth: 10// parent.width - parent.leftPadding - parent.rightPadding
+                        text: pluginMenuItem.text
+                        Component.onCompleted: {
+                            while (textMetrics.width + 10 > iconLab.width) {
+                               pluginMenuItem.font.pixelSize--;
+                            }
+                        }
+                    }
+                    icon: pluginMenuItem.icon
+                    text: textMetrics.text
+                    font: pluginMenuItem.font
+
+                    color: pluginMenuItem.enabled ? pluginMenuItem.Material.foreground : pluginMenuItem.Material.hintTextColor
+                }
+
                 onTriggered: {
                     pluginLoader.itemAt(index).source = "file:/" + modelData + "?"+Math.random()    // force reload
                     pluginLoader.itemAt(index).active = true
