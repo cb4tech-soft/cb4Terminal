@@ -25,6 +25,14 @@ Item {
     property SerialManager manager
     signal lineDataAppend(string lineData);
     signal dataAppend(string lineData);
+    Connections{
+        target: manager
+        function onErrorOccured(error) {
+            console.log("Error Occured : ", error)
+            apprendInfoString(error)
+        }
+    }
+
 /*
     function logToText() {
         var chaine = ""
@@ -147,6 +155,16 @@ Item {
 
         var currentDate = new Date
         var dateString = "<font color=\"grey\">" + currentDate.toLocaleTimeString(Qt.locale("fr_FR"),"h:mm:ss") + "</font>";
+
+        serialData.append({"timestamp": dateString ,"serData": outData, "isSend": true})
+    }
+
+    function apprendInfoString(outData)
+    {
+        //console.log("appendOutString - ", outData)
+
+        var currentDate = new Date
+        var dateString = "<font color=\"green\">" + currentDate.toLocaleTimeString(Qt.locale("fr_FR"),"h:mm:ss") + "</font>";
 
         serialData.append({"timestamp": dateString ,"serData": outData, "isSend": true})
     }

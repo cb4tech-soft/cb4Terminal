@@ -109,29 +109,36 @@ void SerialManager::errorHandler(QSerialPort::SerialPortError error)
     case QSerialPort::SerialPortError::DeviceNotFoundError:
         setIsConnected(0);
         qDebug() << " => Device Not Found";
+        emit errorOccured("Device Not Found");
     break;
     case QSerialPort::SerialPortError::OpenError:
         setIsConnected(0);
         qDebug() << " => Open Error";
+        emit errorOccured("Open Error");
     break;
     case QSerialPort::SerialPortError::NotOpenError:
         setIsConnected(0);
         qDebug() << " => Device Not Open";
+        emit errorOccured("Device Not Open");
     break;
     case QSerialPort::SerialPortError::WriteError:
         setIsConnected(0);
         qDebug() << " => Device Write Error";
+        emit errorOccured("Device Write Error");
     break;
     case QSerialPort::SerialPortError::ReadError:
         setIsConnected(0);
         qDebug() << " => Device Read Error";
+        emit errorOccured("Device Read Error");
     break;
     case QSerialPort::SerialPortError::TimeoutError:
         setIsConnected(0);
         qDebug() << " => Device Timeout";
+        emit errorOccured("Device Timeout");
     break;
     case QSerialPort::SerialPortError::ResourceError:
         qDebug() << " => ressource error";
+        emit errorOccured("ressource error");
         setIsConnected(0);
         QTimer::singleShot(2000, [=]{this->connectToPort(m_portName);});
 

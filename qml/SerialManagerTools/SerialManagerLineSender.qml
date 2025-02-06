@@ -8,13 +8,19 @@ import CommandHistoryManager
 
 Item {
     id:root
+
+    property alias textInput: textLine.text
     property SerialManager manager
+    property var hexSeparator: [',', ' ', '-', ';',':', '\n']
+
+    signal sendStringData(var stringData)
+    signal sendHexaData(var hexaData)
+
     width: 600
     height: 80
-    property var hexSeparator: [',', ' ', '-', ';',':', '\n']
-    signal sendStringData(var stringData);
-    signal sendHexaData(var hexaData);
-    property alias textInput: textLine.text
+
+    focus: true
+
     function hexToBytes(hexStr) {
         let separator = null;
         for (let i = 0; i < hexStr.length; i++) {
@@ -101,11 +107,10 @@ Item {
         CommandHistoryManager.setCurrentPosition(0)
     }
 
-    focus: true
-
-
     ColumnLayout{
         id:sendLayout
+
+        property bool advancedMode: false
 
         anchors.right: parent.right
         anchors.top: parent.top
@@ -117,12 +122,9 @@ Item {
         Layout.minimumWidth: 100
         Layout.maximumWidth: 250
 
+        width: (advancedMode)?(repeatTime.implicitWidth): Screen.pixelDensity*25
         spacing: 1
 
-        width: (advancedMode)?(repeatTime.implicitWidth): Screen.pixelDensity*25
-//        width: (advancedMode) ? parent.width/6 : parent.width/7
-
-        property bool advancedMode: false
 
         SpinBox{
             id:repeatTime
@@ -159,6 +161,7 @@ Item {
             rightInset: 1
             leftPadding: 1
             rightPadding: 1
+
             onClicked: {
                 if (sendLayout.advancedMode) {
                     if (timerRepeat.running) {

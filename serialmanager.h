@@ -103,6 +103,8 @@ signals:
 
     void receiveTimeoutChanged();
 
+    void errorOccured(QString error);
+
 private slots:
     void checkData();
     void errorHandler(QSerialPort::SerialPortError error);
