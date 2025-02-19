@@ -71,8 +71,12 @@ Item {
         source: "qrc:/qt-project.org/imports/QtQuick/Controls/Material/images/check.png"
         fillMode: Image.PreserveAspectFit
 
-        scale: control.checkState === Qt.Checked ? 1 : 0
-        Behavior on scale { NumberAnimation { duration: 100 } }
+        scale: control.checkState === Qt.Checked ? 0.95 : 0
+        Behavior on scale {
+            SequentialAnimation {
+                PauseAnimation { duration: 50 }
+                NumberAnimation { duration: 300; easing.type: Easing.OutCubic } }
+        }
     }
 
     Rectangle {

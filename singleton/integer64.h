@@ -33,7 +33,7 @@ class UInteger64 : public QObject
 {
     Q_OBJECT
 
-    enum BYTE_ORDER
+    enum BYTE_ORDER_e
     {
         LSB_FIRST,
         MSB_FIRST
@@ -46,7 +46,7 @@ public:
     void setValue(QByteArray value);
 
     Q_INVOKABLE QString toString();
-    Q_INVOKABLE QDateTime toDate(enum BYTE_ORDER byteOrder = LSB_FIRST);
+    Q_INVOKABLE QDateTime toDate(enum BYTE_ORDER_e byteOrder = LSB_FIRST);
     Q_INVOKABLE QString u64StringToHex(QString id, char separator = ' ');
 
 public slots:

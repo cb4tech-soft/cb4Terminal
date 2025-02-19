@@ -25,12 +25,9 @@ Item {
     property SerialManager manager
     signal lineDataAppend(string lineData);
     signal dataAppend(string lineData);
-    Connections{
-        target: manager
-        function onErrorOccured(error) {
-            console.log("Error Occured : ", error)
-            apprendInfoString(error)
-        }
+    onManagerChanged: {
+        console.log("Error Occured : ", error)
+        appRectangle.apprendInfoString(error)
     }
 
 /*
@@ -231,13 +228,13 @@ Item {
                 text: "Echo Mode"
                 checkable: true
                 checked: true
-                height: parent.height
+                Layout.fillHeight: true
             }
 
             CustomTripleSelector{
                 id: tripleSelector
                 visible: true
-                height: parent.height
+                Layout.fillHeight: true
             }
             ColumnLayout{
                 id: show_echo_box
@@ -264,7 +261,6 @@ Item {
             }
             ColumnLayout{
                 id:ctrlClearRect
-                anchors.rightMargin: 1
                 Layout.minimumWidth: Screen.pixelDensity * 13
                 Layout.maximumWidth: Screen.pixelDensity * 28
                 Layout.fillWidth: true

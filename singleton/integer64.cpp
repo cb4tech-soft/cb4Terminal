@@ -89,7 +89,7 @@ QString UInteger64::toString()
     return QString::number(valueInt);
 }
 
-QDateTime UInteger64::toDate(enum BYTE_ORDER byteOrder)
+QDateTime UInteger64::toDate(enum BYTE_ORDER_e byteOrder)
 {
     while (m_value.length() < 8)
     {

@@ -1,9 +1,11 @@
-#include "crashreporttool.h"
+#include "crashReportTool.h"
 #include <QMutex>
 #include <QtCore>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <csignal>
+
 QMutex mutex;
 
 QStringList debugHistory;
