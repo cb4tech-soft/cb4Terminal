@@ -8,5 +8,6 @@
         <file>plugin/SeqSender/SeqSender.qml</file>
         <file>plugin/Readme.md</file>
         <file>plugin/MaterialDesignIconTester/MaterialDesignIconTester.qml</file>
+        <file>plugin/CitynoxCasier/CitynoxCasier.qml</file>
     </qresource>
 </RCC>
