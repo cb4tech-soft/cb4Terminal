@@ -59,7 +59,7 @@ Item {
         if(switchHex.checked) {
             var error = false
             var bytes = hexToBytes(stringToSend)
-            //console.log(bytes)
+            console.log(bytes)
             if(!error) {
                 //textLine.backgroundColor = AppStyle.backgroundLight
                 stringToSend = bytes

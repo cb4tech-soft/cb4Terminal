@@ -11,6 +11,7 @@ ApplicationWindow {
     id: root
 
     property var glyphs: MaterialGlyphs.glyphs
+    property var glyphsInfo: Object.keys(root.glyphs)
     /*
     Settings {
         id: settings
@@ -26,90 +27,96 @@ ApplicationWindow {
         source: "qrc:/qml/generic/material/materialdesignicons-webfont.ttf"
     }
 
-    ScrollView {
+    ColumnLayout {
         anchors.fill: parent
-        GridView {
+        anchors.topMargin: 5
+        spacing: 0
 
-            id: gridView
-            model: Object.keys(root.glyphs)
-            anchors.fill: parent
-            cellWidth: 110
-            cellHeight: 110
+        Rectangle {
+            Layout.fillWidth: true
+            implicitHeight: 50
+            color: "#ececec"
 
+            TextField {
+                id: searchBar
+                anchors.fill: parent
+                placeholderText: "Rechercher des icônes..."
+                padding: 10
 
-            delegate: Rectangle {
-                id: inner_iconDelegate
-                width: 100
-                height: 100
-                color: "lightgrey"
-                border.color: "grey"
-                radius: 10
-                property bool starred
-                required property int index
-
-                ColumnLayout {
-                    anchors.fill: parent
-                    anchors.centerIn: parent
-                    clip:true
-
-                    Text {
-                        font.family: materialFont.name
-                        font.pointSize: 36
-
-                        text: root.glyphs[Object.keys(root.glyphs)[index]]
-                        color: "blue"
-                        Layout.alignment: Qt.AlignHCenter
-                    }
-
-                    Text {
-                        text: Object.keys(root.glyphs)[index]
-                        font.pointSize: 8
-                        color: "black"
-                        wrapMode: Text.WrapAnywhere
-                        fontSizeMode: Text.Fit
-                        horizontalAlignment: Text.AlignHCenter
-                        Layout.fillWidth: true
-                        Layout.leftMargin: 1
-                        Layout.rightMargin: 1
+                onTextChanged: {
+                    console.log("searchBar.text ", searchBar.text)
+                    if (searchBar.text === "") {
+                        glyphsInfo = Object.keys(root.glyphs)
+                    } else {
+                        glyphsInfo = Object.keys(root.glyphs).filter(function (item) {
+                            return item.toLowerCase().includes(searchBar.text.toLowerCase())
+                        })
                     }
                 }
-                /*
-                MaterialDesignIcon {
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    size: 28
-                    name: !inner_iconDelegate.starred ? "star" : "star-off"
+            }
+        }
 
-                    color: "black"
+        ScrollView {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            clip: true
+            
+            GridView {
+                id: gridView
+                model: glyphsInfo
+                anchors.fill: parent
+                cellWidth: 110
+                cellHeight: 110
 
-                    MaterialDesignIcon {
+                delegate: Rectangle {
+                    id: inner_iconDelegate
+                    width: 100
+                    height: 100
+                    color: "lightgrey"
+                    border.color: "grey"
+                    radius: 10
+                    property bool starred
+                    required property int index
+
+                    MouseArea {
+                        id: mouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+
+                        onHoveredChanged: {
+
+                        }
+                    }
+
+                    ColumnLayout {
+                        anchors.fill: parent
                         anchors.centerIn: parent
-                        size: parent.size - 4
-                        name: parent.name
-                        color: inner_iconDelegate.starred ? "gold" : "white"
+                        clip: true
 
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                console.log("clicked ", index, parent.name, inner_iconDelegate.starred)
-                                if (st_glyphs[index]) {
-                                    st_glyphs[index] = false
-                                } else {
-                                    st_glyphs[index] = true
-                                }
-                                console.log("starred ", st_glyphs[index], inner_iconDelegate.starred)
-                            }
+                        Text {
+                            font.family: materialFont.name
+                            font.pointSize: 36
+                            text: root.glyphs[gridView.model[index]]
+                            color: "blue"
+                            Layout.alignment: Qt.AlignHCenter
                         }
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 200
-                            }
+
+                        TextEdit {
+                            text: gridView.model[index]
+                            font.pointSize: 8
+                            color: "black"
+                            wrapMode: Text.WrapAnywhere
+                            horizontalAlignment: Text.AlignHCenter
+                            Layout.fillWidth: true
+                            Layout.leftMargin: 1
+                            Layout.rightMargin: 1
+                            readOnly: true
+                            selectByMouse: true
+
                         }
                     }
                 }
-                */
             }
         }
     }
-
 }
