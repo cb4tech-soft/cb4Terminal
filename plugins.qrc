@@ -9,5 +9,6 @@
         <file>plugin/Readme.md</file>
         <file>plugin/MaterialDesignIconTester/MaterialDesignIconTester.qml</file>
         <file>plugin/CitynoxCasier/CitynoxCasier.qml</file>
+        <file>plugin/Demo/Demo.qml</file>
     </qresource>
 </RCC>

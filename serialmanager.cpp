@@ -56,13 +56,14 @@ void SerialManager::connectToPort(QString portName)
     m_portName = portName;
     qDebug()<< "connect to " << portName;
     connect(port, &QSerialPort::errorOccurred, this, &SerialManager::errorHandler);
-    port->setBaudRate(m_baudrate);
     port->open(QIODevice::ReadWrite);
     if (port->isOpen())
     {
         qDebug()<< "port open " << portName;
         setIsConnected(1);
     }
+    port->setBaudRate(m_baudrate);
+//    port->setBreakEnabled(true);
     connect(port,SIGNAL(readyRead()), this, SLOT(checkData()));
 }
 

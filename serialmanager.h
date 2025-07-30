@@ -121,7 +121,7 @@ private:
     int m_parity = 0;
     int m_stopBits = 0;
     int m_isConnected;
-    int m_receiveTimeout = 100;
+    int m_receiveTimeout = 20;
 };
 
 

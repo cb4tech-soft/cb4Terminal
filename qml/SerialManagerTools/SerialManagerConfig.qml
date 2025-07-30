@@ -49,7 +49,7 @@ Item {
 
     onParityChanged:{
         if(serialConfig.manager.isConnected)
-            serialConfig.manager.parity = serialConfig.partity
+            serialConfig.manager.parity = serialConfig.parity
     }
 
     onStopBitsChanged: {
