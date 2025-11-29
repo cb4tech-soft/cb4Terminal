@@ -19,9 +19,9 @@ PluginInfo* PluginInfo::m_pThis = nullptr;
 
 PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
 {
-#ifdef Q_OS_WINDOWS
-    QNtfsPermissionCheckGuard permissionGuard;
-#endif
+// #ifdef Q_OS_WINDOWS
+//     QNtfsPermissionCheckGuard permissionGuard;
+// #endif
     QDir d(pluginFolder);
     if (!d.exists())
     {
@@ -41,9 +41,9 @@ PluginInfo::PluginInfo(QObject *parent) : QObject(parent)
 // extract qml plugins from plugins.qrc to plugin folder
 void PluginInfo::extractQrcPlugin()
 {
-#ifndef Q_OS_ANDROID
-    QNtfsPermissionCheckGuard permissionGuard;
-#endif
+// #ifndef Q_OS_ANDROID
+//     QNtfsPermissionCheckGuard permissionGuard;
+// #endif
     QDir d(pluginFolder);
     QFile versionFile(pluginFolder + BUILD_VERSION_FILE);
     bool newVersion = false;
