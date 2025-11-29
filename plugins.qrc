@@ -9,5 +9,7 @@
         <file>plugin/Readme.md</file>
         <file>plugin/MaterialDesignIconTester/MaterialDesignIconTester.qml</file>
         <file>plugin/CitynoxCasier/CitynoxCasier.qml</file>
+        <file>plugin/AtimConfigDumper/AtimConfigDumper.qml</file>
+        <file>plugin/AtimConfigWriter/AtimConfigWriter.qml</file>
     </qresource>
 </RCC>
