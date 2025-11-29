@@ -11,5 +11,6 @@
         <file>plugin/CitynoxCasier/CitynoxCasier.qml</file>
         <file>plugin/AtimConfigDumper/AtimConfigDumper.qml</file>
         <file>plugin/AtimConfigWriter/AtimConfigWriter.qml</file>
+        <file>plugin/Demo/Demo.qml</file>
     </qresource>
 </RCC>
